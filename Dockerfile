@@ -66,6 +66,7 @@ RUN mkdir -p tmp/pids
 
 EXPOSE 3000
 
-# Remove a stale server.pid (left if a prior container crashed)
-# and start the Rails server bound to all interfaces so docker can reach it.
-CMD ["bash", "-c", "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3000"]
+# Remove a stale server.pid (left if a prior container crashed),
+# verify gems are present (auto-install if not — useful when the source bind
+# mount's Gemfile got new entries since the image was built), then start Rails.
+CMD ["bash", "-c", "rm -f tmp/pids/server.pid && (bundle check || bundle install) && bundle exec rails server -b 0.0.0.0 -p 3000"]

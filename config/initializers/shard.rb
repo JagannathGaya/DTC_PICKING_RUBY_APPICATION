@@ -3,7 +3,11 @@ begin
   envlist = Dir[Rails.root.join('config', 'environments', '*.rb')].map {|file| File.basename(file, '.rb')}
 
   require 'yaml'
-  dbyml_content = YAML.load_file(Rails.root.join('config', 'database.yml'))
+  require 'erb'
+  # Load database.yml through ERB so `<%= ENV.fetch(...) %>` interpolations
+  # resolve. `YAML.load_file` would treat them as literal strings, breaking
+  # any Docker/env-driven host or password override.
+  dbyml_content = YAML.load(ERB.new(File.read(Rails.root.join('config', 'database.yml'))).result)
 
   begin
     Client.all.each do |client|

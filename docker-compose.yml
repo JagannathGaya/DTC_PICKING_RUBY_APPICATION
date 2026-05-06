@@ -1,5 +1,3 @@
-version: "3.8"
-
 # This compose file does NOT run PostgreSQL. The Rails containers connect to
 # an EXISTING Postgres server. Configure where via environment variables (see
 # defaults below). You can override them by:
@@ -13,8 +11,11 @@ version: "3.8"
 x-app: &app
   build: .
   volumes:
+    # Mount source so edits on the host reflect in the container without rebuild.
+    # Note: we deliberately do NOT mount a volume over /usr/local/bundle —
+    # gems are installed at build time and live in the image. A named volume
+    # there would shadow them and break git-source gems like ar-octopus.
     - .:/app
-    - bundle_cache:/usr/local/bundle
   extra_hosts:
     - "host.docker.internal:host-gateway"
   environment:
@@ -38,7 +39,4 @@ services:
   # delayed_job background worker — same image, different command.
   worker:
     <<: *app
-    command: bundle exec rake jobs:work
-
-volumes:
-  bundle_cache:
+    command: bash -c "(bundle check || bundle install) && bundle exec rake jobs:work"
