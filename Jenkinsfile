@@ -13,7 +13,7 @@ pipeline {
                 sh '''
                 echo "🚀 Copying code..."
 
-                mkdir -p $APP_DIR
+                // mkdir -p $APP_DIR
                 rm -rf $APP_DIR/*
                 cp -r $WORKSPACE/* $APP_DIR/
                 '''
