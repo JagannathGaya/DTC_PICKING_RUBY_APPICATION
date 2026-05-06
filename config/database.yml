@@ -4,7 +4,7 @@ development:
   database: <%= ENV.fetch('DATABASE_NAME', 'tbcorp_development') %>
   username: <%= ENV.fetch('DATABASE_USERNAME', 'postgres') %>
   password: <%= ENV.fetch('DATABASE_PASSWORD', 'Pgsql@2026') %>
-  host: <%= ENV.fetch('DATABASE_HOST', 'host.docker.internal') %>
+  host: <%= ENV.fetch('DATABASE_HOST', '192.168.66.49') %>
   pool: 5
 
 lonnie_dev:
@@ -91,9 +91,8 @@ tbdash_development:
   encoding: utf8
   database: <%= ENV.fetch('TBDASH_DATABASE_NAME', 'tbdash_development') %>
   username: <%= ENV.fetch('DATABASE_USERNAME', 'postgres') %>
-  password: <%= ENV.fetch('DATABASE_PASSWORD', 'admin') %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD', 'Pgsql@2026') %>
   host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
-  port: <%= ENV.fetch('DATABASE_PORT', '5432') %>
   pool: 5
 
 tbdash_lonnie_dev:
