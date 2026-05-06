@@ -1,0 +1,30 @@
+<footer>
+  <!--  <div class="row">&nbsp;</div>-->
+  <div id="footer">
+    <br/>
+    <table class="table table-sm table-responsive">
+      <tbody>
+      <tr class="text-muted">
+        <td><%= raw(t(:page_footer)) %><br/>Corporate.<%#= link_to 'Help and Documentation', home_helpfile_path %></td>
+        <td><%= " #{t('user.time_zone')}: #{Time.zone.name}" %><br/>
+          <% if current_user && current_user.locale %>
+            <p><%= "#{t('user.locale')}: #{(User::LOCALES.detect {|x| x[1] == current_user.locale})[0]}" %></p>
+          <% else %>
+            <p><%= "#{t('user.locale')}: #{(User::LOCALES.detect {|x| x[1] == I18n.default_locale.to_s})[0]}" %></p>
+          <% end %>
+        </td>
+        <td><%= home_link %> <br/>
+          <% unless Rails.env.production? %>
+            <p style="color:blue"><%= "#{Rails.env} #{t('footer_env')}" %></p>
+          <% end %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</footer>
+<div class='loading-indicator'>
+  <span>
+    <%= image_tag 'ajax-loader.gif' %>
+  </span>
+</div>

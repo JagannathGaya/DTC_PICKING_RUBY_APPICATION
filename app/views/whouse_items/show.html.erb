@@ -1,0 +1,59 @@
+
+<div id='receipt_batch' class="card card-default">
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-4">
+        <%= t('whouse_item.title_show') %>
+      </div>
+      <div class="col-md-8">
+        <div class="float-right">
+          <%= clear_filters_link(whouse_item_path(@whouse_item.item_slug)) %>
+          <%= home_link %>
+          <%= back_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body">
+      <div style='max-width: 1002px; margin: auto;'>
+        <ul class="nav nav-tabs">
+          <li class="nav-item border border-info rounded bg-light">
+            <a id='tab-item_info' class="nav-link font-weight-bold <%= @batch_tab == 'I' ? 'active' : ' ' %>"
+               data-toggle="tab" href="#item_info">Item Info</a>
+          </li>
+          <li class="nav-item border border-info rounded bg-light <%= @batch_tab == 'L' ? 'active' : ' ' %>">
+            <a id='tab-item_locs' class="nav-link font-weight-bold"
+               data-toggle="tab" href="#item_locs">Bin Locations</a>
+          </li>
+          <li class="nav-item border border-info rounded bg-light <%= @batch_tab == 'T' ? 'active' : ' ' %>">
+            <a id='tab-item_trans' class="nav-link font-weight-bold"
+               data-toggle="tab" href="#item_trans">Transactions</a>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <div id="item_info" class="tab-pane container <%= @batch_tab == 'I' ? 'active' : ' ' %>">
+          <div class="card card-default">
+            <div class="card card-body">
+              <%= render :partial => 'item_info' %>
+            </div>
+          </div>
+        </div>
+        <div id="item_locs" class="tab-pane container <%= @batch_tab == 'L' ? 'active' : ' ' %>">
+          <div class="card card-default">
+            <div class="card card-body">
+              <%= render :partial => 'item_locs' %>
+            </div>
+          </div>
+        </div>
+        <div id="item_trans" class="tab-pane container <%= @batch_tab == 'T' ? 'active' : ' ' %>">
+          <div class="card card-default">
+            <div class="card card-body">
+              <%= render :partial => 'item_trans' %>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+

@@ -1,0 +1,17 @@
+<section id='edit_label'>
+  <div class="card card-default">
+    <div class="card card-heading"><%= t('receipt_item.print_label') %></div>
+    <div class="card card-body">
+      <%= bootstrap_form_for [@receipt_batch, @receipt_item], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+          <%= f.hidden_field :lock_version, {:value => @receipt_item.lock_version} %>
+          <%= f.hidden_field :receipt_batch_id, {:value => @receipt_item.receipt_batch_id} %>
+          <%= f.hidden_field :empno, {:value => @receipt_item.empno} %>
+          <%= hidden_field_tag(:putaway, 'true') %>
+          <%= f.text_field :item_no, label: t('receipt_batch.item_no'),  readonly: true, wrapper: { class: 'form-control-sm' } %>
+          <%= f.number_field :label_copies, min: 1, step: 1, label: t('receipt_item.label_copies'), wrapper: { class: 'form-control-sm' } %>
+          <%= f.submit t('receipt_item.print_label'), class: 'btn btn-primary btn-sm',  name: "print_label" %>
+      <% end %>
+    </div>
+  </div>
+</section>
+

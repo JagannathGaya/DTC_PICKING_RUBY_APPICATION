@@ -1,0 +1,4 @@
+class PageRequest < ApplicationRecord
+
+
+end

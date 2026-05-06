@@ -1,0 +1,30 @@
+admin:
+  email: admin@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  name: "Adam Administrator"
+  time_zone: "Eastern Time (US & Canada)"
+  locale: "en"
+  user_type: "admin"
+user:
+  email: user@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  name: "Ulysses User"
+  time_zone: "Eastern Time (US & Canada)"
+  locale: "en"
+  user_type: "user"
+  client: first
+host:
+  email: host@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  name: "Harry Host"
+  time_zone: "Eastern Time (US & Canada)"
+  locale: "en"
+  user_type: "host"
+deleter:
+  email: deleter@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  name: "Ulysses deleter"
+  time_zone: "Eastern Time (US & Canada)"
+  locale: "en"
+  user_type: "user"
+  client: first

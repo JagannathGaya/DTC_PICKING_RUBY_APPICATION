@@ -1,0 +1,55 @@
+<div class="card card-default" style='max-width: 1000px; margin: auto;'>
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-6"><%= t('whouse_item.title') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= clear_filters_link(whouse_items_path) %>
+          <%= home_link %>
+          <%= back_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='paginator'><%= paginate @whouse_items %></div>
+    <div class="table-responsive" >
+      <table id='whouse_items_table'class='example table-autosort table-autofilter table table-striped table-b whouse_itemed table-hover table-sm  mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_item.item_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_item.description') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_item.status_flag') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_item.discontinue_flag') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_item.wo_info') %></th>
+        </tr>
+        <tr>
+          <th>
+            <input id='whouse_item_no_filter' autofocus='autofocus' value=<%= raw("\"#{session[:filter]['whouse_item_no_filter']}\"") %>/>
+          </th>
+          <th>
+            <input id='whouse_description_filter' autofocus='autofocus' value=<%= raw("\"#{session[:filter]['whouse_description_filter']}\"") %>/>
+          </th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @whouse_items.each do | whouse_item| %>
+          <tr>
+            <td><%= search_display_whouse_item(whouse_item) %></td>
+            <td><%= whouse_item.description %></td>
+            <td <%= search_status_color(whouse_item.status_flag) %> ><%= whouse_item.status_flag %></td>
+            <td <%= search_discontinue_color(whouse_item.discontinue_flag) %> ><%= whouse_item.discontinue_flag %></td>
+            <td><%= whouse_item.wo_info %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+

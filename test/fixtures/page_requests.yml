@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  controller: Admin::PageRequestsController
+  action: index
+  format: html
+  method: GET
+  path: /admin/page_requests
+  status: 200
+  action_date: <%= Date.today %>
+  action_hour: 15
+one:
+  id: 1
+  controller: Admin::PageRequestsController
+  action: index
+  format: html
+  method: GET
+  path: /admin/page_requests
+  status: 200
+  action_date: <%= Date.today - 9 %>
+  action_hour: 16
+  created_at: <%= 9.days.ago.to_s :db %>
+
+

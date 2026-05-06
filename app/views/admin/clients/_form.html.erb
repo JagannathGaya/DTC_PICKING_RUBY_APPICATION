@@ -1,0 +1,33 @@
+<section id='client'>
+  <div class='content'>
+    <div>
+      <legend><%= "#{@client.cust_name ? t('client.edit') + ': ' + @client.cust_name : t('client.new')}" %></legend>
+      <%#= render :partial => 'layouts/notices' %>
+      <%= bootstrap_form_for [:admin, @client], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+        <%= f.hidden_field :lock_version, {:value => @client.lock_version} %>
+        <%= f.alert_message t(:correct_errors) %>
+        <%= f.text_field :cust_no, autofocus: true, autocomplete: 'off', class: 'uppercase', label: t('client.cust_no'), wrapper: { class: 'form-control-sm' } %>
+        <%= f.text_field :cust_name, autocomplete: 'off', label: t('client.cust_name'), wrapper: { class: 'form-control-sm' } %>
+        <%= f.email_field :email, autocomplete: 'off', label: t('client.email'), wrapper: { class: 'form-control-sm' } %>
+        <%= f.email_field :client_manager_email, autocomplete: 'off', label: t('client.client_manager_email'), wrapper: { class: 'form-control-sm' } %>
+        <div class='form-control-sm'>
+          <%= f.form_group do %>
+            <%= f.check_box :allow_combined, label: t('client.allow_combined'), wrapper: { class: 'form-control-sm' } %>
+          <% end %>
+        </div>
+        <%= f.text_field :database, autocomplete: 'off', label: t('client.database'), wrapper: { class: 'form-control-sm' } %>
+        <%= f.text_field :username, autocomplete: 'off', label: t('client.username'), wrapper: { class: 'form-control-sm' } %>
+        <%= f.text_field :password, autocomplete: 'off', label: t('client.password'), wrapper: { class: 'form-control-sm' } %>
+
+        <%= f.form_group do %>
+          <%= image_tag @client.logo.url(:thumb) %>
+        <% end %>
+        <%= f.file_field :logo, label: t('client.logo'), wrapper: { class: 'form-control-file-sm' } %>
+        <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm'} %>
+
+
+      <% end %>
+    </div>
+  </div>
+
+</section>

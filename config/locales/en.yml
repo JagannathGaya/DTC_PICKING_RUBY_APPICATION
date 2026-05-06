@@ -1,0 +1,915 @@
+en:
+  page_footer: "Thoroughbred Fulfillment logos, site design &amp; content © 2021 Thoroughbred Fulfillment All Rights Reserved."
+  footer_env: environment
+  hello: Hello,
+  of: of
+  save: Save
+  sign_out: Sign out
+  edit: Edit
+  confirm: "Are you sure?"
+  back: Back
+  home: Home
+  cancel: Cancel
+  show_detail: More
+  hide_detail: Less
+  my_profile: My Profile
+  correct_errors: Please correct the fields in error
+  rows_per_page: Rows per page
+  select: "Select..."
+  all: All
+  full: Content
+  blank: Blank
+  clear_filters: Clear filters
+  ays_changes: "You have unsaved changes!"
+  welcome: Welcome to Thoroughbred Fulfillment
+  select_client: Set Client
+  csv: CSV
+  xml: XML
+  xls: XLS
+  xlsx: XLSX
+  unknown_export_format: Unknown export format
+  invalid_process: Unknown Process
+  is_yes: "Yes"
+  is_no: "No"
+  date:
+    formats:
+      edit: "%Y-%m-%d"
+      display: "%d-%^b-%y"
+      label: "%m-%d-%Y"
+  time:
+    formats:
+      edit: "%Y-%m-%d %H:%M"
+      date: "%Y-%m-%d"
+      full: "%H:%M %b %e, %Y"
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "..."
+  menu:
+    maintenance: Maintenance
+    processes: Processes
+    performance: Performance
+    dash: Dashboard
+    picking: Picking
+    orders_link: Select Orders
+    lines_link: View Lines
+    pick_link: Resume Pick
+    items_link: Items
+    tbdash_sales_orders_link: Sales Orders
+    binpick_batch_link: Manage Batch
+    binpick_all_batch_link: All Batches
+    binpick_pick_link: Pick by Bin
+    binpick_replenishments_link: Replenishment Moves
+    host_receipts: Receiving
+    receipt_batches_link: Receipt Entry/Maint
+    receipt_upload_link: Receiver Upload
+    finders: Finders
+    find_item_link: Find by Item
+    find_bin_link: Find by Bin
+    binpick_emp_sums_link: Picker Totals
+    auto_moved_items_link: Auto-Moved Items
+  user:
+    id: ID
+    email: Email
+    password: Password
+    password_confirmation: Password confirmation
+    remember_me: "Remember me?"
+    new_password: New password
+    new_confirmation: Confirm new password
+    name: Screen name
+    locale: Locale
+    time_zone: Time zone
+    sign_up: Sign Up
+    sign_in: Sign In
+    forgot_password: "Forgot your password?"
+    no_confirmation: "Didn't receive confirmation instructions?"
+    no_unlock: "Didn't receive unlock instructions?"
+    resend_confirmation: "Resend confirmation instructions"
+    send_reset: "Send me reset password instructions"
+    resend_unlock: "Resend unlock instructions"
+    change_password: "Change your password"
+    change_my_password: "Change my password"
+    current_password: "Current password"
+    leave_blank: "(leave blank if you don't want to change it)"
+    need_current: "(we need your current password to confirm your changes)"
+    waiting: "Currently waiting confirmation for:"
+    delete: Delete
+    confirm_delete: Are you sure you want to delete this user?
+    deleted: User has been removed
+    not_deleted: User has NOT been removed
+    impersonate: Impersonate
+    copy_permit: Add Std Permits
+    last_seen: Last seen
+    first_seen: First seen
+    never: never
+    unconfirmed: unconfirmed
+    ago: ago
+    not_yourself: You can not delete yourself
+    not_found: The user you were looking for could not be found
+    edit: Edit User
+    new: New User
+    created: User has been created
+    not_created: User has not been created
+    updated: User has been updated
+    not_updated: User has not been updated
+    conflict: The User has been updated by another user, please try again
+    list: List Users
+    empno: NDS Emp No
+    user_type: User type
+    client: Client
+    must_have_client: Client is required for this type of user
+    must_not_have_client: Client is forbidden for this type of user
+    must_have_empno: Employee No is required for this type of user
+    must_not_have_empno: Employee No is forbidden for this type of user
+    type:
+      admin: Administrator
+      user: User
+      host: Host
+    confirm: Administratively confirm user
+    unlock: Unlock user access
+    unlocked: User has been unlocked
+    pick_release: Release all Picks
+    make_api_key: Generate New API Key
+    api_key: API Key
+  admin:
+    must_be_admin: You must be an admin to do that!
+    must_be_host: You must be an employee to do that!
+    jobs_link: Background Jobs
+    users_link: Users
+    clients_link: Clients
+    carriers_link: Carriers
+    makers_link: Report Makers
+    permits_link: Permits
+    perf_detail_link: Detail List
+    perf_method_hits_link: HTTP Method Activity
+    perf_db_runtimes_link: DB Average Runtimes
+    log_requests_link: Tail Current Log
+    log_errors_link: Routing Errors
+    view_chart: View or Refresh Chart
+    binpick_batches_link: Binpick Batches
+    jobs:
+      client_name: Client
+      deleted: Background job has been destroyed
+      not_deleted: Background job has NOT been destroyed
+      title: Background Jobs
+      delete: Delete
+      confirm_delete: Are you sure you want to delete this job?
+      priority_hdr: Priority
+      attempts_hdr: Attempts
+      handler_hdr: Handler
+      last_error_hdr: Last Error
+      run_at_hdr: Run At
+      locked_at_hdr: Locked At
+      failed_at_hdr: Failed At
+      locked_by_hdr: Locked By
+      queue_hdr: Queue
+      failed: The job failed!
+      run: Execute
+      bootstrap: Create Schedule
+      test_email: Send Test Email
+      email_sent: Sent. Now run the job.
+      test_email_body: Testing email connections
+      test_email_subject: "[THOROUGHBRED] Test email connection"
+      notify_email_subject: "[THOROUGHBRED] System Administration Error"
+    page_request:
+      title: Page Request Detail
+      controller: Controller
+      action: Action
+      format: Format
+      method: Method
+      path: Path
+      status: Status
+      action_date: Date
+      action_hour: Hour
+      page_runtime: Page Secs
+      view_runtime: View Secs
+      db_runtime: DB Secs
+      created_at: Timestamp
+      method_hits: HTTP Method Volume and Average Time
+      db_runtimes: DB Average Runtimes
+    logs:
+      title: Most Recent Log Entries
+      text: Text
+      title_errors: Routing Errors
+      logged_at: Logged At
+      action: Action
+      request: Object requested
+      logfile: Log File Name
+  mailer:
+    your_report: "[THOROUGHBRED REPORT] The %{name} report you requested"
+    report_body1: Please find the report you requested attached
+    report_name: "Report: %{name}"
+    rundate: "Executed as of %{as_of}"
+    receiver: "[THOROUGHBRED REPORT] Receiver: %{batch}"
+    receiver_comment: "[THOROUGHBRED REPORT] Receiving Comment: %{batch} %{item}"
+  client:
+    id: ID
+    cust_name: Name
+    cust_no: Client ID
+    email: Email
+    client: Client
+    client_manager_email: Client Mgr email
+    allow_combined: Allow Combined Binpick Batches
+    title: "Client:"
+    created: Client has been created
+    not_created: Client has not been created
+    updated: Client has been updated
+    not_updated: Client has not been updated
+    confirm_delete: Are you sure you want to delete this client?
+    deleted: Client has been destroyed
+    not_deleted: Client has NOT been destroyed
+    not_found: The client you were looking for could not be found
+    list: All Clients
+    list_all: List Clients
+    edit: Edit Client
+    delete: Delete Client
+    new: New Client
+    conflict: The client has been updated by another user, please try again
+    filter: "Filter cust no (% is wild): "
+    logo: Logo file (125*50)
+    database: Connect String
+    username: User
+    password: Password
+    not_set: "Set Client first!"
+    locations: Locations
+    reset_binpick_batches: Reset Binpick Batches
+    confirm_reset: Are you sure you want to destroy/reset all active Binpick batches for this client ?
+    batch_reset_complete: Binpick Batches have been reset successfully
+    batch_reset_failed: Binpick Batch reset failed
+  client_location:
+    title: "Locations for: %{client}"
+    sls_location: Location
+    name: Name
+    created: Client Location has been created
+    not_created: Client Location has not been created
+    updated: Client Location has been updated
+    not_updated: Client Location has not been updated
+    confirm_delete: Are you sure you want to delete this Client Location?
+    deleted: Client Location has been destroyed
+    not_deleted: Client Location has NOT been destroyed
+    last_not_deleted: Client Location has NOT been destroyed - there must be at least one location
+    not_found: The Client Location you were looking for could not be found
+    list: All Clients
+    edit: Edit Client Location
+    delete: Delete Client Location
+    new: New Client Location
+    conflict: The Client Location has been updated by another user, please try again
+  carrier:
+    carrier_cd: Code
+    name: Name
+    url: url
+    title: "Carrier:"
+    created: Carrier has been created
+    not_created: Carrier has not been created
+    updated: Carrier has been updated
+    not_updated: Carrier has not been updated
+    confirm_delete: Are you sure you want to delete this carrier?
+    deleted: Carrier has been destroyed
+    not_deleted: Carrier has NOT been destroyed
+    not_found: The carrier you were looking for could not be found
+    list: All Carriers
+    list_all: List Carriers
+    edit: Edit Carrier
+    delete: Delete Carrier
+    new: New Carrier
+    conflict: The carrier has been updated by another user, please try again
+    alternate_names: Aliases
+  maker:
+    name: Name
+    exec: Execute
+    options: Parameters
+    title: "Report Maker:"
+    created: Report Maker has been created
+    not_created: Report Maker has not been created
+    updated: Report Maker has been updated
+    not_updated: Report Maker has not been updated
+    confirm_delete: Are you sure you want to delete this Report Maker?
+    deleted: Report Maker has been destroyed
+    not_deleted: Report Maker has NOT been destroyed
+    not_found: The Report Maker you were looking for could not be found
+    list: All Report Makers
+    list_all: List Report Makers
+    edit: Edit Report Maker
+    delete: Delete Report Maker
+    new: New Report Maker
+    conflict: The Report Maker has been updated by another user, please try again
+    malformed: The execute string does not refer to an executable method
+  permit:
+    report_name: Report Name
+    client_id: Client
+    user_id: User
+    allow: Allow?
+    title: "Permissions:"
+    created: Permit has been created
+    not_created: Permit has not been created
+    updated: Permit has been updated
+    not_updated: Permit has not been updated
+    confirm_delete: Are you sure you want to delete this Permit?
+    deleted: Permit has been destroyed
+    not_deleted: Permit has NOT been destroyed
+    not_found: The Permit you were looking for could not be found
+    list: All Permits
+    list_all: List Permits
+    edit: Edit Permit
+    delete: Delete Permit
+    new: New Permit
+    conflict: The Permit has been updated by another user, please try again
+    not_allowed: You are not permitted to run that report or process
+  order:
+    title: Open Orders
+    order_no: Order
+    ship_name: Ship To
+    shipto_country_cd: Country
+    estship_dt: Ship Date
+    start_pick: Start Pick Process
+  order_line:
+    title: Selected Order Lines
+    order_no: Order
+    line_no: Line No
+    item_no: Item
+    item_desc: " "
+    qty_order: Order Qty
+    stock_area: Area
+    bin_loc: Bin
+    def_on_hand: Bin Qty
+    other_on_hand: Bulk Stock
+  pick:
+    title: Order Pick
+    pick_type: Action
+    item_no: Item No
+    pick_qty: Qty
+    pick_area: Area
+    pick_bin: Bin
+    order: Order
+    line_no: Line No
+    actual_qty: Actual
+    picked: Picked
+    pick: Pick!
+    finish_pick: Picking Complete
+    oracle_error: Oracle inserts failed. Pick is not complete and is still in process.
+  tbdash_item:
+    id: ID
+    title: Items Listing
+    xlsx_title: Inventory
+    item_no: Item
+    description: Description
+    stock_um: U/M
+    item_type: Type
+    qty_on_hand: On Hand
+    qty_alloc_mfg: Alloc Mfg
+    qty_alloc_sales: Alloc Sales
+    qty_on_order: On Order
+    qty_backordered: Backordered
+    qty_reserved: Reserved
+    qty_oh_reserved: On Hand Reserved
+    filter: "Filter Item no or description (% is wild): "
+    filter_no_only: "Filter Item no (% is wild): "
+    discontinue_flag: "Discontinue?"
+    status_flag: Status
+    history: History
+    activity:
+      prompt: Select Status
+      A: Active Items Only
+      I: Inactive Items Only
+      X: All Items
+    product_code: Product Code
+    product_code_desc: Product Description
+    return_to: "Return to item %{item_no}"
+    buyer_code: Buyer
+    product_group: Product Group
+    product_group_desc: Group Description
+    allowed_item_code: Allowed Item
+    disc_flg: Disc Flag
+    abc_class: ABC Class
+    opn_sls_ord: Open orders
+    available: Net Available
+    status_disc: Status
+    allocation_level: Alloc level
+    allocation_quantity: Alloc Qty
+    wco_hs_code: WCO HS Code
+    avgusage: Avg Usage
+    reorder_pt: Reorder Point
+    safety_stock: Safety Stock
+    base_list_price: List Price
+    accum_material: Matl Cost
+    value: Value
+    desc1: Desc 1
+    desc2: Desc 2
+    make_buy_flag: Make Buy
+    flags: Flags
+    order_point: Order Point
+    order_qty: Order Qty
+    eoq: EOQ
+    date_reported: Date Reported
+    last_mo_book: Last Mth Book
+    last_mo_used: Last Mth Used
+    qoh_reorderpt: QOH Reorder Point
+    ext_price: Ext Price
+    date_updated: Date Updated
+    ytd_shipped: YTD Shipped
+    vendor_name: Vendor
+  order_item:
+    id: ID
+    title: Open Sales Orders for
+    title_order: Items in Sales Order
+    order_no: Order
+    item_no: Item
+    item_desc: Description
+    qty_order: Order Qty
+    qty_shipped: Shipped Qty
+    qty_bo: Backorder Qty
+    cust_item_no: Customer Item
+    shipment_no: Shipment ID
+    ship_name: Ship Name
+    due_date: Due Date
+    sales_um: U/M
+    declared_value: Value
+  sales_order:
+    id: ID
+    title: Current Sales Orders
+    sales_order_status: Status
+    order_status_list:
+      O: Open
+      J: In Shipping
+      S: Shipped
+      V: Invoiced
+    order_no: Order
+    shipment_no: Shipment ID
+    order_date: Ordered On
+    order_utc: Ordered On
+    estship_dt: Ship by
+    estship_utc: Ship by
+    cust_po: PO
+    ship_name: Ship Name
+    ship_attn: Attention
+    address: Address
+    ship_addr1: Address 1
+    ship_addr2: Address 2
+    shipto_city: City
+    shipto_state: State/Province
+    shipto_country_cd: Country
+    carrier_id: Carrier ID
+    carrier_name: Carrier Name
+    service_type: Service Type
+    deliver_by: Deliver By
+    deliver_by_utc: Deliver By
+    pickup_by: Pickup By
+    pickup_by_utc: Pickup By
+    pro_number: Tracking No
+    bill_of_lading: BOL
+    gross_wt: Gross Weight
+    container_count: "# Containers"
+    retailer_id: Retailer ID
+    retailer_name: Retailer Name
+    order_suffix: Suffix
+    cust_no: Customer
+    cust_name: Customer Name
+    status_desc: Status Description
+    filter: "Filter Order no or shipment ID (% is wild): "
+    plant_code: Plant
+    return_to: "Return to sales order %{order_no}"
+    service_level: Service Level
+  binpick_batch:
+    id: ID
+    client_id: Client
+    client_location_id: Location
+    user_id: Owning User
+    start_order_seq: Start Order ID
+    status: Batch Status
+    start_seq: Start ID
+    end_seq: End ID
+    created_at: Created
+    updated_at: Last Access
+    title: Binpick Batches
+    pick_title: Binpick Batch
+    list_title: Bins in batch
+    updated: Binpick Batch has been updated
+    not_updated: Binpick Batch has not been updated
+    created: Binpick Batch is being created
+    no_orders: There are no Status J orders with which to create a Binpick Batch
+    seq_overlaps: "The Order ID range conflicts with client %{cust_no} (%{from} thru %{to})"
+    not_created: Binpick Batch has not been created
+    not_found: The Binpick Batch you were looking for could not be found
+    list: All Binpick Batches
+    list_all: List Binpick Batches
+    edit: Edit Binpick Batch
+    delete: Delete
+    complete: Binpick Batch has been fully packed
+    nearly_complete: "Check: All folders in batch range (%{start} thru %{end}) are empty"
+    pick: Pick
+    conflict: The Binpick Batch has been updated by another user, please try again
+    open_batch: Open Binpick Batch
+    another_client: "You have a Binpick batch for another client (%{cust_no}) open"
+    another_batch: "Open batches already exist for this client."
+    change_batch: "Switch to %{bo_option} Batch"
+    only_one_batch: Only one open batch for a client can be for all orders
+    another_user: "Another user (%{emp_no}) has a Binpick batch for this client open"
+    other_new: "Create %{bo_option} Batch"
+    confirm_delete: Are you sure you want to delete this Binpick Batch?
+    confirm_picked: Are you sure you want to complete this Binpick Batch as fully picked?
+    confirm_complete: Are you sure you want to complete as packed and finally process this Binpick Batch?
+    deleted: Binpick Batch has been destroyed
+    not_deleted: Binpick Batch has NOT been destroyed - wrong status
+    picked: Binpick Batch has been fully picked
+    completed: Binpick Batch has been completed and packed
+    not_completed: Binpick Batch can not be closed until all pickable bins are completed
+    not_deletable: Binpick Batch can not be deleted while it is being processed in background.
+    status_list:
+      I: Inactive
+      B: Being Created
+      O: Open
+      C: Complete
+      K: Picked
+      W: Waiting for Pack
+      P: In Process
+      X: Cancelled
+    bo_option: Order Option
+    bo_option_list:
+      A: All Orders
+      B: Backorders
+      N: New Orders
+  binpick_bin:
+    bin_seq: Bin Seq
+    stock_area: Area
+    bin_loc: Bin
+    order_count: "#Orders"
+    line_count: "#Lines"
+    pick_qty: Pick Qty
+    empno: Employee
+    status: Status
+    pick_title: "Start picking a new bin for %{bo_option}"
+    scanner_entry: Scan the bin ID barcode
+    no_open_batch: There is no pickable BinPick Batch for this client
+    open_bin: Pick using this bin
+    scan_a_bin: "Please scan a suitable bin label (scan was: %{scanned})"
+    not_pickable: "Bin is not a BIN PICK bin or an ALL ORDERS bin, scan ignored."
+    get_your_own_bin: "This bin is currently owned by %{owner}"
+    bin_title: "Picking from Area %{area} Bin %{bin_loc}"
+    bin_backordered: "The remaining order lines for %{item} have been backordered"
+    bin_bo_reversed: "The backordered order lines for %{item} have been reversed"
+    bin_autopicked: "The order lines for %{item} have been autopicked"
+    bin_completed: "The pick for Area %{area} Bin %{bin_loc} is complete"
+    complete: Pick is complete
+    backorder: Backorder remainder
+    shortage: Shortage
+    bo_reverse: Reverse Backorders
+    autopick: Autopick All Orders
+    wave_pick_link: Wave Picks
+    other_batch: "Pick %{bo_option} Batch"
+    confirm_backorder: Are you sure you want to backorder the remainder of the lines for this item?
+    confirm_bo_reverse: Are you sure you want to reverse all backordered lines for this item ?
+    confirm_order_line: Confirm!
+    unconfirm_order_line: Unconfirm!
+    release: Release Bin
+    confirm_release: Are you sure you want to release this bin?
+    defer: Defer Bin
+    confirm_defer: Are you sure you want to defer this bin?
+    choose_status: "Choose Status:"
+    all_orders_text: All orders in this batch require this item
+  binpick_bin_item:
+    display: "%{open} remaining of %{pick} for %{item}"
+    title: "Items in bin %{stock_area} %{bin_loc}"
+    item_no: Item
+    line_count: Lines
+    open_qty: Qty Open
+    qty_shipped: Qty Shipped
+    qty_backordered: Qty B/O
+    status: Status
+    pick_type: Pick Type
+    bin_type: Bin Type
+    first_short_order_seq: First Un-filled Order ID
+    backorder_all_orders: ALL ORDERS -- Shortage / Backorder
+  binpick_order_line:
+    title_popup: "Line Items in Order ID %{order_id} Order No %{order_no}"
+    title_lines_popup: "Lines for Item %{bin_item}"
+    wave_picks_title: Wave Picking for Batch %{batch_id}
+    order_seq: Order ID
+    wave_order_seq: Tote / Folder ID
+    order_line_seq: Line ID
+    order_no: Order No
+    line_no: Line
+    item_no: Item No
+    item_desc: Description
+    qty_shipped: Qty
+    qty_bo: B/O
+    empno: Employee
+    action: Action
+    stock_area: Area
+    bin_loc: Bin
+    pick_type: Pick Type
+    bin_type: Bin Type
+    large_order_yn: Large Order
+    message: Message
+    title: Batch Summary
+    new_title: Client Status
+    stat_type: Statistic
+    stat_value: Value
+    backorder_line: Backorder
+    wave_to_bin: Back to Bin Selector
+  binpick_bin_summary:
+    title: Bin Summary
+    open_title: Available bins
+    nothing_to_pick: All bins for this batch have been completely processed
+    stock_area: Area
+    bin_loc: Bin
+    area_bin: Area Bin
+    empno_name: Employee
+    order_count: "Orders"
+    line_count: "Lines"
+    pick_qty: Pick Qty
+    open_lines: "Lines Open"
+    completed_lines: "Lines Picked"
+    backordered_lines: "Lines B/O"
+    deassign: Deassign Bin
+    pick_type: Pick Type
+    open_qty: Qty Remaining
+  binpick_replenishment:
+    title: Replenishment Moves
+    stock_area: Area
+    bin_loc: Move To
+    bin_qty: Bin Qty
+    item_no: Item
+    description: Description
+    total_required: Total Need Today
+    net_required: Move at Least
+    from_stock_area: From Area
+    from_bin_loc: Move From
+    from_qoh: Qty in From Bin
+    trans_qty: Move Qty
+    move_it: "Move!"
+    row_type: Action
+    scanner_entry: Scan bin ID
+    confirm_delete: "Send this PUTAWAY back to PICK?"
+  binpick_order:
+    title: Orders in Batch
+    binpick_batch_id: Batch ID
+    order_seq: Order ID
+    order_no: Order
+    order_suffix: Ord Suf
+    initial_bin_seq: Init bin seq
+    large_order_yn: Large Order
+    has_wave_pick_yn: Has Wave
+    ship_name: Ship Name
+    total_qty: Total Qty
+    line_count: Lines
+    shipping_status: Ship Status
+    confirm_delete: Are you sure you want to remove this Order from the batch?
+    deleted: The order has been removed from the batch
+    not_deleted: The order has NOT been removed from the batch
+  binpick_batch_summary:
+    title: Batch Summary
+    new_title: Orders Available
+  receipt_batch:
+    id: Batch No
+    client_id: Client
+    item_no: Item No
+    note: Note
+    batch_status: Status
+    vendor_no: Vendor
+    tracking_ref: Tracking Reference
+    receipt_upload_hdr_id: Up ID
+    empno: Employee
+    po_ref: PO Reference
+    dock_receipt_at: Dock Receipt At
+    created: Receipt Batch has been created
+    not_created: Receipt Batch has not been created
+    updated: Receipt Batch has been updated
+    not_updated: Receipt Batch has not been updated
+    confirm_delete: Are you sure you want to delete this batch?
+    deleted: Receipt Batch has been destroyed
+    not_deleted: Receipt Batch has NOT been destroyed
+    not_found: The Receipt Batch you were looking for could not be found
+    list: All Receipt Batches
+    list_all: List Receipt Batches
+    edit: Edit Receipt Batch Header
+    edit_lines: View/Edit Receipt Batch Lines
+    delete: Delete Receipt Batch
+    new: New Receipt Batch
+    new_from_upload: New Batch from Upload
+    view_uploads: View Uploads
+    conflict: The Receipt Batch has been updated by another user, please try again
+    title: Receipt Batches
+    post: Post Batch
+    putaway: Putaway Batch
+    close: Close Batch
+    closed: The Receipt Batch has been marked complete
+    not_closed: The Receipt Batch can not be marked complete
+    all_unmuted: All Remaining Unmuted Items
+    download_861: Download 861 File
+    status_error_pending: Pending batch with qty remaining is invalid
+  receipt_item:
+    receipt_batch_id: Batch No
+    item_no: Item
+    boxcount: Boxes
+    stock_area: Stock Area
+    bin_loc: Bin
+    empno: Empno
+    quantity: Quantity
+    qty_remaining: Remaining
+    status_flag: Status
+    current_default_loc: Current Default Loc
+    discontinue_flag: Discontinued
+    description: Description
+    created: Receipt Item has been created
+    created_bad_item: Receipt Item has been created with an invalid Item No
+    not_created: Receipt Item has not been created
+    updated: Receipt Item has been updated
+    not_updated: Receipt Item has not been updated
+    confirm_delete: Are you sure you want to delete this item?
+    deleted: Receipt Item has been destroyed
+    not_deleted: Receipt Item has NOT been destroyed
+    not_found: The Receipt Item you were looking for could not be found
+    duplicate_item: This item number is already present in the batch, cannot create
+    locations_exist: Cannot change item number for this Receipt Item, putaway transactions exist for it
+    mute: Mute
+    mute_all: Mute All
+    unmute: Unmute
+    confirm_mute: Are you sure you want to mute this item?
+    confirm_mute_all: Are you sure you want to mute all items?
+    confirm_unmute: Are you sure you want to unmute this item?
+    select_default: Default Loc
+    list: All Receipt Items
+    list_all: List Receipt Items
+    delete: Delete Receipt Item
+    new: New Item
+    edit: Edit Item
+    conflict: The Receipt Item has been updated by another user, please try again
+    find_item: Lookup
+    title: "Line Items for Receipt Batch %{batch}"
+    new_line_title: "Receipt Batch %{batch}"
+    search_title: "Look up Item %{partial}"
+    mail_tbrc_title: Item Receipt Alert
+    mail_tbrc_body: An item with a specific alert has been Received today
+    mail_tbrc_comment: "Here is the comment/note from ICMM:"
+    searched: Searched
+    note: Note
+    print_label: Print Label
+    label_copies: "# Copies"
+    label_printed: Label Printed
+    comment: Comment
+    putaway: "Area-Bin / Quantity / New Def / Def Action"
+  receipt_location:
+    title: "Putaways for Receipt Batch %{batch}"
+    item_no: Item
+    stock_area: Area
+    bin_loc: Bin
+    quantity: Quantity
+    select_putaway_location: Select
+    created: Receipt Location has been created
+    not_created: Receipt Location has not been created
+    qty_too_big: Can not put away more than was received
+    reversal_loc_not_found: Cannot enter reversal for putaway location not associated with this line item
+    reversal_qty_too_big: Cannot enter reversal quantity which exceeds original quantity stocked to this location for this line item
+    list: List Putaways
+    new_default: "Make Default"
+    defloc_action: Default Action
+  tbdash_recv_putaway_loc:
+    stock_area: Area
+    bin_loc: Bin
+    item_no: Item
+    loc_type: Loc Type
+    qty_on_hand: Quantity
+  receipt_upload_hdr:
+    title: Upload Receipt Batches
+    client_id: Client
+    po_ref: PO Reference
+    vendor_no: Carrier
+    delivery_type: Delivery
+    tracking_ref: Tracking
+    dt_expected: Date Expected
+    hr_expected: Hour Expected
+    upload_status: Status
+    filename: File to upload
+    boxcount: Box Count
+    actual_boxcount: Actual Boxes
+    created: Upload Receipt Batch has been created
+    created_with_notes: "Upload Receipt Batch has been created with errors. Please view lines for details."
+    not_created: Upload Receipt Batch has not been created
+    updated: Upload Receipt Batch has been updated
+    not_updated: Upload Receipt Batch has not been updated
+    confirm_delete: Are you sure you want to delete this batch?
+    deleted: Upload Receipt Batch has been destroyed
+    not_deleted: Upload Receipt Batch has NOT been destroyed
+    not_found: The Upload Receipt Batch you were looking for could not be found
+    list: All Upload Receipt Batches
+    list_all: List Upload Receipt Batches
+    edit: Edit
+    view: View
+    delete: Delete Upload
+    new: New Upload
+    conflict: The Upload Receipt Batch has been updated by another user, please try again
+    numrows: "#Rows"
+    notes: Notes
+  receipt_upload_dtl:
+    title: "Line Items for Receipt Upload of PO/Ref %{po_ref}"
+    line_no: Line
+    item_no: Item
+    quantity: Quantity
+    boxcount: Box Count
+    note: Note
+    vendor_id: Vendor
+    po_no: PO No
+    shipment_no: Shipment No
+    shipment_line: Shipment Line
+    shipment_date: Shipment Date
+    qty_shipped: Qty Shipped
+  location_master:
+    title: Find by Bin
+    unit_code: Unit
+    plant_code: Plant
+    stock_area: Area
+    bin_loc: Bin
+    stock_area_desc: Bin Name
+    nettable: Nettable
+    backflush_loc: Backflush
+    staging_allowed: Staging
+    shipping_capable: Shipping
+    controlled: Controlled
+    cust_owned: Customer
+    loc_group_cd: Group
+    quarantine: Quarantine
+  item_hist:
+    item_no: Item No
+    trans_date: Trans Date
+    trans_date_utc: Trans Date
+    trans_type: Type
+    trans_type_desc: Trans Type
+    trans_qty: Quantity
+    stock_area: Area
+    bin_loc: Bin
+    reason_code: Reason
+    reason_desc: Reason Desc
+    ref_order: Ref Order
+    empno: Empno
+    area_bin: Area-Bin
+    ref_remark: Ref/Remark
+    current_loc: Current
+  whouse_inv:
+    title_by_bin: "Items currently in location %{area_bin}"
+    title: "Bin Locations for item %{item_no}"
+    title_trans: "Transactions for item %{item_no}"
+    item_no: Item No
+    description: Description
+    stock_um: Stock UM
+    status_flag: Status
+    discontinue_flag: Discontinue
+    vendor_name: vendor
+    area_bin: Area-Bin
+    qty_on_hand: On Hand
+    is_default: Default
+  whouse_item:
+    title: Find by Item
+    title_show: Item Details
+    item_no: Item
+    description: Description
+    status_flag: Status
+    discontinue_flag: Discontinued
+    wo_info: WO Info
+  search_location:
+    title: Find by Bin
+    stock_area: Area
+    bin_loc: Bin
+    area_bin: Area-Bin
+  item_location:
+    list_title: "Items in Area %{stock_area} Bin %{bin_loc}"
+    scan_title: Find by Location
+    scanner_entry: Scanner Entry
+    stock_area: Area
+    bin_loc: Bin
+    find_bin: Look in Bin
+    ff_schema: Schema
+    item_no: Item
+    description: Description
+    qty_on_hand: On Hand
+    s_d: A/D
+  binpick_emp_sum:
+    index_title: Picker Counts by Day
+    show_title: Picking Counts by Client for %{empno} %{emp_name}
+    work_date: Date
+    empno: Employee No
+    emp_name: Name
+    lines: Lines
+    bins: Bins
+    pieces: Pieces
+    ff_schema: Client
+  auto_moved_item:
+    title: Auto-Moved Items
+    xlsx_title: Auto-Moved Items
+    empno: Moved By
+    item_no: Item No
+    qty_moved: Qty Moved
+    move_date: Date Moved
+    from_stock_area: From Area
+    from_bin_loc: From Bin
+    to_stock_area: To Area
+    to_bin_loc: To Bin
+    processed_date: Moved At
+    processed_flag: Moved ?
+    include_processed: Include Processed Rows?
+    done: Done
+    generate_button: Generate Moves
+    confirm_generate: Are you sure you wish to generate additional stock moves for this client ?
+

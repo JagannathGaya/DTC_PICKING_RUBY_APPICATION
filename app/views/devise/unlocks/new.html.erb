@@ -1,0 +1,13 @@
+<section id='user_unlock'>
+  <div class="card card-default">
+    <div class="card-heading"><%= "#{t('user.no_unlock')}" %></div>
+    <div class="card-body">
+      <%= bootstrap_form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => {:method => :post}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.email_field :email, label: t('user.email'), autofocus: true, required: true, wrapper: { class: 'form-control-sm' } %>
+        <%= f.submit t('user.resend_unlock'), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</section>

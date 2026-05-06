@@ -1,0 +1,13 @@
+$(document).ready(function(){
+    detail_toggler();
+});
+
+function detail_toggler() {
+    $('.toggle_details').click(function(){
+        $(this).siblings('table.more_details').slideToggle(300);
+        if($(this).html() == '<%= I18n.t(:show_detail) %>')
+        { $(this).html('<%= I18n.t(:hide_detail) %>');}
+        else
+        { $(this).html('<%= I18n.t(:show_detail) %>');}
+    });
+}

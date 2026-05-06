@@ -1,0 +1,37 @@
+<div class="card card-default">
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-12"><%= t('item_location.list_title', {stock_area: @stock_area, bin_loc: @bin_loc}) %></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='paginator'><%= paginate @item_locations %></div>
+    <div class="table-responsive">
+      <table id='item_locations_table' class='example table-autosort table-autofilter table table-striped table-bbinpick_replenishmented table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('item_location.ff_schema') %></th>
+          <th class='table-sortable:numeric'><%= t('item_location.item_no') %></th>
+          <th class='table-sortable:numeric'><%= t('item_location.description') %></th>
+          <th class='table-sortable:numeric'><%= t('item_location.qty_on_hand') %></th>
+          <th class='table-sortable:numeric'><%= t('item_location.s_d') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @item_locations.each do |item_location| %>
+          <tr>
+            <td><%= item_location.ff_schema %></td>
+            <td><%= search_display_item(item_location) %></td>
+            <td><%= item_location.description %></td>
+            <td><%= formatted_qty(item_location.qty_on_hand) %></td>
+            <td <%= search_sd_class(item_location) %> ><%= item_location.s_d %></td>
+           </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+

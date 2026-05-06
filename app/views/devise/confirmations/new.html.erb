@@ -1,0 +1,14 @@
+<%= render "devise/shared/links" %>
+<section id='no_confirmation'>
+  <div class="card card-default">
+    <div class="card-heading"><%= "#{t('user.no_confirmation')}" %></div>
+    <div class="card-body">
+      <%= bootstrap_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => {:method => :post}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.email_field :email, label: t('user.email'), autofocus: true, required: true, wrapper: { class: 'form-control-sm' } %>
+        <%= f.submit t('user.resend_confirmation'), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</section>

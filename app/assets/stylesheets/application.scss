@@ -1,0 +1,129 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ * = require_tree .
+ *= require colorbox-rails
+ * = require_self
+ *= require jquery-ui
+ *= require rails_bootstrap_forms
+ *= require table
+ */
+//@import "colorbox-rails.css";
+//@import "bootstrap-sprockets";
+@import "bootstrap";
+//@import "jquery-ui/core.css";
+//@import "jquery-ui/datepicker.css";
+//@import "jquery-ui/slider.css";
+//@import "jquery-ui/tabs.css";
+
+
+body {
+  text-size: 12px;
+}
+
+/* table fix for mozilla/gecko engine*/
+@-moz-document url-prefix() {
+    fieldset {
+        display: table-cell;
+    }
+}
+
+/* add the missing input-xs class*/
+.input-xs {
+    height: 22px;
+    padding: 1px 1px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.btn-xs, .btn-group-xs > .btn {
+  padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  border-radius: 0.2rem;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.hilite {
+    border: 1px solid red;
+    background: #fddfdf;
+}
+
+.redlight {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.dashboard_query_grid_row {
+  font-size: x-large;
+}
+
+label.required::after {
+  content: " *";
+}
+
+.card-heading {
+  font-weight: bold;
+  font-size: 14px;
+  background-color: #dee2e6;
+  padding: 3px 16px;
+}
+
+.page_link {
+  background-color: #dee2e6;
+  border: 1px solid;
+  border-color: #fff;
+}
+
+.page-item {
+  background-color: #dee2e6;
+}
+
+.page_size_selector {
+  padding-left: 30px;
+  padding-top: -3px;
+  padding-right: 30px;
+}
+
+.dropdown-toggle {
+  border: 1px solid;
+  border-color: #dee2e6;
+}
+
+.fatrow {
+  height: 60px;
+}
+
+.giantrow {
+  height: 200px;
+}
+
+.binpick_row_type {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 16px;
+}
+
+.binpick_big_font {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.binpick_med_font {
+  font-size: 32px;
+  font-weight: bold;
+}

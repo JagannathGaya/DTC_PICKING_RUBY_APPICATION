@@ -1,0 +1,30 @@
+<section id='receipt_item'>
+  <div class="card card-default" style='max-width: 700px; margin: auto;'>
+    <div class="card card-heading"><%= "#{t('receipt_item.new_line_title', {batch: @receipt_batch.id})} #{@receipt_item.id ? t('receipt_item.edit') + ': ' + @receipt_item.item_no : t('receipt_item.new')}" %></div>
+    <div class="card card-body">
+      <%= bootstrap_form_for [@receipt_batch, @receipt_item], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+          <%= f.hidden_field :lock_version, {:value => @receipt_item.lock_version} %>
+          <%= f.hidden_field :receipt_batch_id, {:value => @receipt_item.receipt_batch_id} %>
+          <%= f.hidden_field :empno, {:value => @receipt_item.empno} %>
+          <%= f.hidden_field :searched, {:value => @receipt_item.searched} %>
+          <%= f.hidden_field :note, {:value => @receipt_item.note} %>
+          <%= f.error_messages %>
+          <div class="form-control form-control-sm">
+            <label class="col-form-label col-sm-3" for="receipt_item_item_no"><%= t('receipt_item.item_no') %></label>
+            <div class="col-sm-7">
+              <input autofocus="autofocus" autocomplete="off" class="form-control uppercase" type="text" value="<%= "#{@receipt_item.item_no}" %>"  name="receipt_item[item_no]" id="receipt_item_item_no"/>
+            </div>
+            <div class="col-sm-2">
+              <%= find_receipt_item_link(@receipt_batch, @receipt_item) %>
+            </div>
+          </div>
+          <%= f.number_field :boxcount, label: t('receipt_item.boxcount'), wrapper: { class: 'form-control-sm' }, style: "width:80px;" %>
+          <%= f.text_field :stock_area, label: t('receipt_item.stock_area'), autocomplete: 'off', wrapper: { class: 'form-control-sm' }, class: 'uppercase' %>
+          <%= f.text_field :bin_loc, label: t('receipt_item.bin_loc'), autocomplete: 'off', wrapper: { class: 'form-control-sm' }, class: 'uppercase' %>
+          <%= f.number_field :quantity, label: t('receipt_item.quantity'), wrapper: { class: 'form-control-sm' }, style: "width:80px;" %>
+          <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+    </div>
+  </div>
+</section>
+

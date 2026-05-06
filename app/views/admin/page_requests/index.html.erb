@@ -1,0 +1,78 @@
+<div class="card card-default">
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('admin.page_request.title') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= clear_filters_link(admin_page_requests_path) %>
+          <%= home_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body">
+    <div class="row">
+      <div id='paginator'><%= paginate @page_requests %></div>
+    </div>
+    <div class="table-responsive">
+      <table width='100%' id='page_request_table'
+             class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('admin.page_request.controller') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.page_request.action') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.page_request.format') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.page_request.method') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.page_request.path') %></th>
+          <th class='table-sortable:numeric'><%= t('admin.page_request.status') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.page_request.action_date') %></th>
+          <th class='table-sortable:numeric'><%= t('admin.page_request.action_hour') %></th>
+          <th class='table-sortable:numeric'><%= t('admin.page_request.page_runtime') %></th>
+          <th class='table-sortable:numeric'><%= t('admin.page_request.view_runtime') %></th>
+          <th class='table-sortable:numeric'><%= t('admin.page_request.db_runtime') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.page_request.created_at') %></th>
+        </tr>
+        <tr>
+          <th><%= pr_controller_filter %></th>
+          <th><%= pr_action_filter %></th>
+          <th><%= pr_format_filter %></th>
+          <th><%= pr_method_filter %></th>
+          <th></th>
+          <th><%= pr_status_filter %></th>
+          <th></th>
+          <th></th>
+          <th> >
+            <input id='pr_page_runtime_filter' value=<%= raw("\"#{session[:filter]['pr_page_runtime_filter']}\" type='number' min='0' style='width: 90%;' ") %>/>
+          </th>
+          <th> >
+            <input id='pr_view_runtime_filter' value=<%= raw("\"#{session[:filter]['pr_view_runtime_filter']}\" type='number' min='0' style='width: 90%;' ") %>/>
+          </th>
+          <th> >
+            <input id='pr_db_runtime_filter' value=<%= raw("\"#{session[:filter]['pr_db_runtime_filter']}\" type='number' min='0' style='width: 90%;' ") %>/>
+          </th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @page_requests.each do |page_request| %>
+          <tr>
+            <td><%= page_request.controller %></td>
+            <td><%= page_request.action %></td>
+            <td><%= page_request.format %></td>
+            <td><%= page_request.method %></td>
+            <td><%= page_request.path %></td>
+            <td><%= page_request.status %></td>
+            <td><%= formatted_date(page_request.action_date) %></td>
+            <td><%= page_request.action_hour %></td>
+            <td><%= formatted_qty(page_request.page_runtime) %></td>
+            <td><%= formatted_qty(page_request.view_runtime) %></td>
+            <td><%= formatted_qty(page_request.db_runtime) %></td>
+            <td><%= formatted_time(page_request.created_at, :edit) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

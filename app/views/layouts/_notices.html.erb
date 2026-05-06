@@ -1,0 +1,9 @@
+<div class='row' id="notices">
+  <% flash.each do |key, value| %>
+    <% if !value.to_s.include?('true') || value.to_s.length > 10 %>
+      <div class="col-md-offset-1 col-md-10 alert alert-<%= key == 'notice' ? 'success' : 'danger' %>" role="alert">
+        <%= value %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

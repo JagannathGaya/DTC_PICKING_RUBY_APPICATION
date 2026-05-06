@@ -1,0 +1,61 @@
+<div class="card card-default" style='max-width: 1000px; margin: auto;'>
+  <div class="card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('pick.title') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= finish_pick_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <table id='picks_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+      <thead>
+      <tr>
+        <th><%= t('pick.pick_type') %></th>
+        <th></th>
+        <th><%= t('pick.pick_area') %></th>
+        <th><%= t('pick.pick_bin') %></th>
+        <th><%= t('pick.item_no') %></th>
+        <th><%= t('pick.pick_qty') %></th>
+        <th><%= t('pick.actual_qty') %></th>
+        <th><%= t('pick.pick') %></th>
+        <th><%= t('pick.order') %></th>
+        <th><%= t('pick.line_no') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @picks.each do |pick| %>
+        <tr id='<%= pick.id.to_s %>'>
+          <td><%= pick.pick_type %></td>
+          <td><%= pick.path %></td>
+          <td><%= pick.pick_area %></td>
+          <td><%= pick.pick_bin %></td>
+          <td><%= pick.item_no %></td>
+          <td class='pick_qty'><%= formatted_qty(pick.pick_qty) %></td>
+          <td>
+            <% unless pick.drop? %>
+              <input class='pick_actual_qty' type="number" pattern="[0-9]*" value=<%= "#{pick.actual_qty.to_i}" %>/>
+            <% end %>
+          </td>
+          <td>
+            <% unless pick.drop? %>
+              <%= check_box_tag("#{pick.id.to_s}", 'off', (pick.actual_qty != 0), class: 'line-picker') %>
+            <% end %>
+          </td>
+          <td><%= display_order(pick) %></td>
+          <td><%= pick.line_no %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="float-left">
+    <%= home_link %>
+  </div>
+</div>
+
+
+

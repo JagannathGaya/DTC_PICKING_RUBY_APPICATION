@@ -1,0 +1,79 @@
+<div class="card card-default" style='max-width: 1000px; margin: auto;'>
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-5"><%= t('binpick_bin.bin_title', {area: @binpick_bin.stock_area, bin_loc: @binpick_bin.bin_loc}) %></div>
+      <div class="col-md-7">
+        <div class="float-right">
+          <%= t('binpick_bin.choose_status') %>
+          <%= binpick_bin_select_action %>
+          <%= binpick_bin_release(@binpick_bin) %>
+          <%= binpick_bin_defer(@binpick_bin) %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <table id='orders_table' class='example table table-striped table-bordered table-hover table-sm table-responsive'>
+          <% @binpick_bin_items.each do |binpick_bin_item| %>
+            <tr>
+              <% unless @binpick_bin.pick_all_orders? && @binpick_order_lines.count > 0 %>
+                <td class="align-middle"><%= binpick_bin_item_backorder(binpick_bin_item, @binpick_bin) %></td>
+              <% end %>
+              <td class="align-middle"><%= display_binpick_bin_item(binpick_bin_item) %></td>
+              <% if @binpick_bin.pick_all_orders? %>
+                <td class="align-middle"><%= binpick_all_orders_backorder(binpick_bin_item, @binpick_order_lines.count > 0) %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <a id="top"></a>
+  <div class="card-body">
+    <% if @binpick_bin.pick_type != BinpickBin::ALL_ORDERS || @binpick_order_lines.count > 0 %>
+    <div id='paginator'><%= paginate @binpick_order_lines %></div>
+    <div class="table-responsive">
+      <table id='binpick_order_lines_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th><%= t('binpick_order_line.order_seq') %>
+            <%= sorter(binpick_bin_path(@binpick_bin.id.to_i), 'order_seq') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.item_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.item_desc') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_order_line.qty_shipped') %></th>
+          <th class='table-sortable:alphanumeric'></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% firstrow = true %>
+        <% @binpick_order_lines.each do |order_line| %>
+          <% order_show = 'Order: ' + order_line.order_no.to_i.to_s + '-' + order_line.order_suffix.to_i.to_s + '/' + order_line.line_no.to_i.to_s %>
+          <tr class="<%= binpick_tr_class(order_line, firstrow) %>" id='<%= order_line.id.to_s %>'
+              data-toggle="tooltip" trigger="focus hover"
+              title="<%= order_show %>">
+            <td class="align-middle" style="width: 50%;"><%= binpick_bin_confirm_order_line(order_line, firstrow) %>
+              <%= binpick_bin_unconfirm_order_line(order_line, firstrow) %></td>
+            <td class="align-middle h3" ontouchstart='alert("<%= order_show %>");' onclick='alert("<%= order_show %>");'>
+              <%= order_line.item_no %></td>
+            <td class="align-middle h3" ontouchstart='alert("<%= order_show %>");' onclick='alert("<%= order_show %>");'>
+              <%= order_line.item_desc %></td>
+            <td  <%= order_line_qty_td(order_line) %> ontouchstart='alert("<%= order_show %>");' onclick='alert("<%= order_show %>");'>
+              <%= order_line_qty(order_line) %>
+            </td>
+            <td class="align-middle h3" ontouchstart='alert("<%= order_show %>");' onclick='alert("<%= order_show %>");'>
+              <%= order_line.message %></td>
+          </tr>
+          <% firstrow = false %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+      <% else %>
+    <h2><%= t('binpick_bin.all_orders_text') %></h2>
+    <% end %>
+  </div>
+</div>
+
+
+

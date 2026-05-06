@@ -1,0 +1,33 @@
+<div class="card card-default">
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-12"><%= t('binpick_emp_sum.index_title') %></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id='binpick_emp_sums_table' class='example table-autosort table-autofilter table table-striped table-bbinpick_replenishmented table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_emp_sum.work_date') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_emp_sum.empno') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_emp_sum.emp_name') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_emp_sum.bins') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_emp_sum.pieces') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @binpick_emp_sums.each do |binpick_emp_sum| %>
+          <tr>
+            <td><%= formatted_date(binpick_emp_sum.work_date) %></td>
+            <td><%= binpick_emp_sum_drill_link(binpick_emp_sum.empno) %></td>
+            <td><%= binpick_emp_sum.emp_name %></td>
+            <td><%= binpick_emp_sum.bins %></td>
+            <td><%= binpick_emp_sum.pieces %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

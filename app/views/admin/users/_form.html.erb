@@ -1,0 +1,35 @@
+<section id='edit_user'>
+  <div class="card card-default">
+    <div class="card-heading"><%= "#{@user.id.blank? ? t('user.new') : t('user.edit') + ': ' + @user.screen_name }" %></div>
+    <div class="card-body">
+      <%= bootstrap_form_for [:admin, @user], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+        <%= f.hidden_field :lock_version, {:value => @user.lock_version} %>
+        <%= f.alert_message t(:correct_errors) %>
+        <%= f.email_field :email, label: t('user.email'), autofocus: true, required: true, wrapper: {class: 'form-control-sm'} %>
+        <%= f.text_field :name, label: t('user.name'), wrapper: {class: 'form-control-sm'} %>
+        <%= f.text_field :empno, label: t('user.empno'), wrapper: {class: 'form-control-sm'} %>
+        <% if @user.id == current_user.id %>
+          <%= f.text_field :user_type, label: t('user.user_type'), value: "#{@user.display_user_type}", readonly: true, wrapper: {class: 'form-control-sm'} %>
+        <% else %>
+          <%= f.select :user_type,
+                       User::USER_TYPES.invert, selected: @user.user_type,
+                       include_blank: t(:select), label: t('user.user_type'), wrapper: {class: 'form-control-sm'} %>
+        <% end %>
+        <%= f.select :client_id,
+                     @clients.map {|s| ["#{s.cust_no}:#{s.cust_name}", s.id]},
+                     selected: @user.client_id,
+                     include_blank: t(:select), label: t('user.client'), wrapper: {class: 'form-control-sm'} %>
+        <%= f.select :locale, User::LOCALES, selected: @user.locale,
+                     include_blank: t(:select), label: t('user.locale'), wrapper: {class: 'form-control-sm'} %>
+        <%= f.password_field :password, label: t('user.password'), wrapper: {class: 'form-control-sm'} %>
+
+        <div class='form-control-sm'>
+          <p class='form-control-plaintext'><%= t('user.leave_blank') %></p>
+        </div>
+        <%= f.password_field :password_confirmation, label: t('user.password_confirmation'), class: 'required', wrapper: {class: 'form-control-sm'} %>
+        <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+    </div>
+  </div>
+</section>
+

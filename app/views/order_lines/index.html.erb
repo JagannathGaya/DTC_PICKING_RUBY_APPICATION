@@ -1,0 +1,57 @@
+<div class="card card-default" style='max-width: 1000px; margin: auto;'>
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-6"><%= t('order_line.title') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= back_link %>
+          <%= start_pick_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='paginator'><%= paginate @order_lines %></div>
+    <div>
+      <table id='order_lines_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('order_line.item_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('order_line.item_desc') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('order_line.order_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('order_line.line_no') %></th>
+          <th class='table-sortable:numeric'><%= t('order_line.qty_order') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('order_line.stock_area') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('order_line.bin_loc') %></th>
+          <th class='table-sortable:numeric'><%= t('order_line.def_on_hand') %></th>
+          <th class='table-sortable:numeric'><%= t('order_line.other_on_hand') %></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <% @order_lines.each do |order_line| %>
+          <tr>
+            <td><%= order_line.item_no %></td>
+            <td><%= order_line.item_desc %></td>
+            <td><%= order_line.order_number %></td>
+            <td><%= order_line.line_no %></td>
+            <td><%= formatted_qty(order_line.qty_order) %></td>
+            <td><%= order_line.stock_area %></td>
+            <td><%= order_line.bin_loc %></td>
+            <td><%= formatted_qty(order_line.def_on_hand) %></td>
+            <td><%= formatted_qty(order_line.other_on_hand) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="float-left">
+      <%= home_link %>
+      <%= back_link %>
+    </div>
+  </div>
+</div>
+
+
+

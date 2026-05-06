@@ -1,0 +1,48 @@
+<div class="card card-default">
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-12"><%= t('binpick_bin_item.title', {stock_area: @binpick_bin.stock_area, bin_loc: @binpick_bin.bin_loc}) %></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id='binpick_bin_items_table' class='example table-autosort table-autofilter table table-striped table-bbinpick_replenishmented table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_bin_item.item_no') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_bin_item.line_count') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_bin_item.open_qty') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_bin_item.qty_shipped') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_bin_item.qty_backordered') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_bin_item.status') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_bin_item.pick_type') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_bin_item.bin_type') %></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @binpick_bin_items.each do |binpick_bin_item| %>
+          <tr>
+            <td><%= binpick_bin_item.item_display %></td>
+            <td><%= binpick_item_lines_link(binpick_bin_item) %></td>
+            <td><%= binpick_item_openq_link(binpick_bin_item) %></td>
+            <td><%= binpick_item_shipq_link(binpick_bin_item) %></td>
+            <td><%= binpick_item_backq_link(binpick_bin_item) %></td>
+            <td><%= binpick_bin_item.status_display %></td>
+            <td><%= binpick_bin_item.pick_type %></td>
+            <td><%= binpick_bin_item.bin_type %></td>
+            <td>
+              <% if binpick_bin_item.backordered? %>
+                <%= binpick_bin_item_reverse_backorder(binpick_bin_item) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+

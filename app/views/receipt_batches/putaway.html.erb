@@ -1,0 +1,102 @@
+<div class="card card-default">
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('receipt_item.title', {batch: @receipt_batch.id.to_s + ' ' + @receipt_batch.note}) %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= list_receipt_batches_link %>
+          <%= close_receipt_batch_link(@receipt_batch) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body">
+    <div>
+      <div id='paginator'><%= paginate @receipt_items %></div>
+      <table width='100%' id='receipt_item_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+        <thead>
+        <tr>
+          <th></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.item_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.description') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_item.boxcount') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_item.quantity') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_item.qty_remaining') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.comment') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.status_flag') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.current_default_loc') %></th>
+          <th><%= mute_all_receipts_link(@receipt_batch) %><%= unmute_all_receipts_link(@receipt_batch) %></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @receipt_items.each do |receipt_item| %>
+          <tr id='row<%= receipt_item.id %>'>
+            <td><%= putaway_receipt_item_label_link(receipt_item) %></td>
+            <td><%= edit_receipt_item_link(receipt_item) %></td>
+            <td><%= receipt_item.description %></td>
+            <td><%= receipt_item.boxcount %></td>
+            <td><%= receipt_item.quantity %></td>
+            <td><%= receipt_item.qty_remaining %></td>
+            <td><%= receipt_item.comment %></td>
+            <td><%= extended_status(receipt_item) %></td>
+            <td><%= receipt_item.current_default_loc %></td>
+            <td><%= mute_receipt_item_link(receipt_item) %></td>
+            <td><%= select_item_default_link(receipt_item) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding-bottom: 20px;">
+      <%= bootstrap_form_for [@receipt_location], html: {multipart: true}, layout: :inline, wrapper_class: "form-control form-control-sm" do |f| %>
+        <%= f.hidden_field :loc_type, {:value => @receipt_location.loc_type} %>
+          <div class="row">
+          <%= f.text_field :stock_area, label: t('receipt_location.stock_area'), autocomplete: 'off', wrapper: {class: 'form-control-sm'}, class: 'uppercase', style: "width:80px;" %>
+          <%= f.text_field :bin_loc, label: t('receipt_location.bin_loc'), autocomplete: 'off', wrapper: {class: 'form-control-sm'}, class: 'uppercase', style: "width:100px;" %>
+          <div class='form-control-sm'>
+            <p class='form-control-plaintext'><%= t('receipt_location.new_default') %></p>
+          </div>
+          <%= f.form_group do %>
+            <%= f.check_box :new_default, label: '&nbsp;'.html_safe, wrapper: {class: 'form-control-sm'} %>
+          <% end %>
+          <%= f.number_field :quantity, label: t('receipt_location.quantity'), wrapper: {class: 'form-control-sm'}, autofocus: "autofocus", style: "width:80px;" %>
+          <%= f.select :receipt_item_id,
+                       @receipt_items.where(mute: false).map {|s| ["#{s.item_no}:#{s.description}", s.id]}.unshift([t('receipt_batch.all_unmuted'), '-1']),
+                       selected: @receipt_location.receipt_item_id,
+                       include_blank: t(:select), label: t('receipt_item.item_no'), wrapper: {class: 'form-control-sm'} %>
+          <%= hidden_field_tag(:receipt_batch_id, @receipt_batch.id.to_s) %>
+          <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm', style: 'margin-top: 8px;'} %>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <table width='100%' id='tbdash_recv_putaway_locs_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('tbdash_recv_putaway_loc.stock_area') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('tbdash_recv_putaway_loc.bin_loc') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('tbdash_recv_putaway_loc.item_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('tbdash_recv_putaway_loc.loc_type') %></th>
+          <th class='table-sortable:numeric'><%= t('tbdash_recv_putaway_loc.qty_on_hand') %></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @tbdash_recv_putaway_locs.each do |tbdash_recv_putaway_loc| %>
+          <tr style="<%= putaway_loc_color(tbdash_recv_putaway_loc) %>">
+            <td><%= tbdash_recv_putaway_loc.stock_area %></td>
+            <td><%= tbdash_recv_putaway_loc.bin_loc %></td>
+            <td><%= tbdash_recv_putaway_loc.item_no %></td>
+            <td><%= tbdash_recv_putaway_loc.loc_type %></td>
+            <td><%= formatted_qty(tbdash_recv_putaway_loc.qty_on_hand) %></td>
+            <td><%= select_putaway_location(tbdash_recv_putaway_loc, @receipt_batch) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+     

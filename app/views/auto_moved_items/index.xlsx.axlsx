@@ -1,0 +1,10 @@
+wb = xlsx_package.workbook
+colnames = AutoMovedItem::COLNAMES
+wb.add_worksheet(name: I18n.t('auto_moved_item.xlsx_title')) do |sheet|
+  sheet.add_row colnames.collect { |colname| I18n.t("auto_moved_item.#{colname}")}
+  puts "Colnames = #{colnames.inspect}"
+  @raw_moved_items.each do |thing|
+    puts "adding xlsx row for #{thing.inspect}"
+    sheet.add_row thing.attributes.values_at(*colnames).collect {|c| '="'+c.to_s.gsub('"','""')+'"'}
+  end
+end

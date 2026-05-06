@@ -1,0 +1,87 @@
+<section id='binpick_bin'>
+  <div class="card card-default" style='max-width: 1000px; margin: auto;'>
+    <div class="card card-heading"><%= t('binpick_bin.pick_title', bo_option: t("binpick_batch.bo_option_list.#{@binpick_batch.bo_option}")) %></div>
+    <div class="card card-body">
+      <%#= render :partial => 'layouts/notices' %>
+      <%= bootstrap_form_for [@binpick_bin], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8" do |f| %>
+        <%= f.hidden_field :id, {:value => @binpick_bin.id} %>
+        <%= f.alert_message t(:correct_errors) %>
+        <%= f.text_field :bin_loc, label: t('binpick_bin.scanner_entry'), wrapper: {class: 'form-control-sm'}, autofocus: true %>
+        <div class="card card-footer">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="float-left">
+                <%= f.submit t('binpick_bin.open_bin'), html_options = {class: 'btn btn-primary btn-sm'} %>
+                <%= binpick_wave_picks_link(@binpick_batch) %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center">
+                <%= change_to_other_batch(@binpick_batch) %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="float-right">
+                <%= cancel_link %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="card card-default" style='max-width: 1000px; margin: auto;'>
+    <div class='card-heading'>
+      <div class="row">
+        <%= t('binpick_bin_summary.open_title') %>
+      </div>
+    </div>
+    <div class="card-body">
+      <% if @binpick_bin_summaries.count == 0 %>
+        <div class="row">
+          <%= t('binpick_bin_summary.nothing_to_pick') %><br/><br/>
+        </div>
+        <% unless @binpick_batch.status == 'K' %>
+          <div class="row">
+            <%= picker_says_picked_complete_binpick_batch(@binpick_batch) %>
+          </div>
+         <% end %>
+      <% else %>
+        <div class="table-responsive">
+          <table id='binpick_bins_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+            <thead>
+            <tr>
+              <th class='table-sortable:alphanumeric'><%= t('binpick_bin_summary.stock_area') %></th>
+              <th class='table-sortable:alphanumeric'><%= t('binpick_bin_summary.bin_loc') %></th>
+              <th class='table-sortable:alphanumeric'><%= t('binpick_bin_summary.pick_type') %></th>
+              <th class='table-sortable:numeric'><%= t('binpick_bin_summary.order_count') %></th>
+              <th class='table-sortable:numeric'><%= t('binpick_bin_summary.line_count') %></th>
+              <th class='table-sortable:numeric'><%= t('binpick_bin_summary.pick_qty') %></th>
+              <th class='table-sortable:numeric'><%= t('binpick_bin_summary.open_qty') %></th>
+              <th class='table-sortable:numeric'><%= t('binpick_bin_summary.empno_name') %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @binpick_bin_summaries.each do |binpick_bin_summary| %>
+              <tr class="<%= summary_row_color(binpick_bin_summary) %>">
+                <td class="align-middle"><%= binpick_bin_summary.stock_area %></td>
+                <td class="align-middle"><%= binpick_bin_summary.bin_loc %></td>
+                <td class="align-middle"><%= binpick_bin_summary.pick_type %></td>
+                <td class="align-middle"><%= formatted_qty(binpick_bin_summary.order_count) %></td>
+                <td class="align-middle"><%= formatted_qty(binpick_bin_summary.line_count) %></td>
+                <td class="align-middle"><%= formatted_qty(binpick_bin_summary.pick_qty) %></td>
+                <td class="align-middle"><%= formatted_qty(binpick_bin_summary.open_qty) %></td>
+                <td class="align-middle"><%= binpick_bin_summary.empno_name %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

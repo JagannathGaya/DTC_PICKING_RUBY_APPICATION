@@ -1,0 +1,13 @@
+<service>
+      <id>tbcorp_job</id>
+      <name>tbcorp_job</name>
+      <description>Thoroughbred Pick Application Worker</description>
+      <executable>C:\Ruby26-x64\bin\ruby.exe</executable>
+      <workingdirectory>C:\rails_projects\tbcorp</workingdirectory>
+      <argument>C:\Ruby26-x64\bin\bundle</argument>
+      <argument>exec</argument>
+      <argument>C:\Ruby26-x64\bin\rake</argument>
+      <argument>jobs:work</argument>
+      <argument>RAILS_ENV=production</argument>
+      <logpath>C:\rails_projects\tbcorp\log</logpath>
+</service>

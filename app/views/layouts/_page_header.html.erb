@@ -1,0 +1,39 @@
+<header>
+  <div class="row">&nbsp;</div>
+  <div id='header' class="row">
+    <div id='logo' class="col-md-2">
+      <% if user_signed_in? && @current_client %>
+        <%= link_to image_tag(@current_client.logo.url(:thumb), border: 0), root_path %>
+      <% else %>
+        <%= link_to image_tag('tbp_logo.gif', border: 0), root_path %>
+      <% end %>
+    </div>
+    <div class="col-md-10">
+      <div id='globalNav' class="btn-group float-right" role="group">
+        <div class="btn-group">
+          <ul>
+            <% if user_signed_in? %>
+              <div class="btn-group">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= t(:hello) %> &nbsp;
+                    <%= current_user.screen_name %>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-item"><%= link_to 'Settings', edit_user_registration_path %></li>
+                    <li class="dropdown-item"><%= link_to t(:sign_out), destroy_user_session_path, method: :delete %></li>
+                  </ul>
+                </div>
+                <div class="btn-group">
+                  <%= render :partial => 'layouts/header_links_host' if host_user? %>
+                  <%= render :partial => 'layouts/header_links_admin' if admin_user? %>
+                </div>
+
+              </div>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

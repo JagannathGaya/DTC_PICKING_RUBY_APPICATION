@@ -1,0 +1,63 @@
+<div class="card card-default" style='max-width: 1000px; margin: auto;'>
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-6"><%= t('binpick_replenishment.title') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= back_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='paginator'><%= paginate @binpick_replenishments %></div>
+    <div class="table-responsive">
+      <table id='binpick_replenishments_table' class='example table-autosort table-autofilter table table-striped table-bbinpick_replenishmented table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:numeric'><%= t('binpick_replenishment.net_required') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_replenishment.trans_qty') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_replenishment.from_bin_loc') %></th>
+          <th><%= t('binpick_replenishment.scanner_entry') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_replenishment.bin_loc') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_replenishment.item_no') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_replenishment.total_required') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_replenishment.from_qoh') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_replenishment.row_type') %></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% prev_row = nil %>
+        <% @binpick_replenishments.each do |binpick_replenishment| %>
+          <tr id='<%= binpick_replenishment.id.to_s %>' class="<%= binpick_repl_class(binpick_replenishment) %>">
+            <td class="text-right align-middle"><%= formatted_qty(binpick_replenishment.net_required) %></td>
+            <td class="align-middle table-warning">
+              <input class="pick_actual_qty" type="number" pattern="[0-9]*" style="max-width: 80px;"
+                     <% unless binpick_replenishment.row_type == BinpickReplenishment::PICK %>
+                     <%= "value = #{binpick_replenishment.trans_qty.to_i}" %>
+                     <%= " #{'readonly=true'} " %>
+                     <% end %> >
+            </td>
+            <td class="align-middle binpick_move_from"><%= binpick_replenishment.from_stock_area %> <%= binpick_replenishment.from_bin_loc %></td>
+            <td class="align-middle">
+              <input class="binpick_replenishment_scan" placeholder='Scan Bin' style="max-width: 100px;">
+            </td>
+            <td class="align-middle"><%= no_dup(prev_row, binpick_replenishment, binpick_replenishment.stock_area) %> <%= no_dup(prev_row, binpick_replenishment, binpick_replenishment.bin_loc) %></td>
+            <td><%= no_dup(prev_row, binpick_replenishment, binpick_replenishment.item_no) %> <%= no_dup(prev_row, binpick_replenishment, binpick_replenishment.description) %></td>
+            <td class="text-right align-middle"><%= no_dup(prev_row, binpick_replenishment, formatted_qty(binpick_replenishment.total_required)) %></td>
+            <td class="<%= binpick_qoh_class(binpick_replenishment) %>"><%= formatted_qty(binpick_replenishment.from_qoh) %></td>
+            <td class="align-middle binpick_row_type"><%= binpick_replenishment.row_type %></td>
+            <td class="align-middle"><%= delete_it(binpick_replenishment) %></td>
+            <% prev_row = binpick_replenishment %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+

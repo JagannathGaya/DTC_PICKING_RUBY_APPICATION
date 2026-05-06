@@ -1,0 +1,13 @@
+<service>
+      <id>tbcorp_demo</id>
+      <name>tbcorp_demo port 3006</name>
+      <description>Thoroughbred Order Pick Demo Instance</description>
+      <executable>C:\Ruby26-x64\bin\ruby.exe</executable>
+      <workingdirectory>C:\rails_projects\tbcorp_demo</workingdirectory>
+      <argument>C:\Ruby26-x64\bin\bundle</argument>
+      <argument>exec</argument>
+      <argument>C:\Ruby26-x64\bin\puma</argument>
+      <argument>-edemo</argument>
+      <argument>-p3006</argument>
+      <logpath>C:\rails_projects\tbcorp_demo\log</logpath>
+</service>

@@ -1,0 +1,5 @@
+<span class="btn btn-default dropdown-toggle">
+  <%= select_tag 'client_setter',
+                 options_for_select(clients_for_selector, selected_for_client_selector),
+                 prompt: t(:select_client) %>
+</span>

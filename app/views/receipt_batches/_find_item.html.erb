@@ -1,0 +1,45 @@
+<div class="card card-default">
+  <div class="card card-heading"><%= t('receipt_item.search_title', partial: @receipt_item_no) %></div>
+  <div class="card card-body">
+    <div class="row">
+      <div id='paginator'>
+        <%= paginate @search_items %>
+      </div>
+      &nbsp;
+      <div class="form-group">
+        <label for='receipt_item_no'><%= t('receipt_batch.item_no') %></label>
+        <input id='receipt_item_no' value=<%= raw("\"#{session[:filter]['receipt_item_no'] || @receipt_item_no}\" class='form-control-sm uppercase'") %>/>
+      </div>
+      <div class="float-right">      &nbsp;
+      <%= list_receipt_batches_link %>      &nbsp;
+      <%= list_receipt_batch_lines_link(@receipt_batch) %>
+      </div>
+    </div>
+    <br/>
+    <table id='items_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+      <thead>
+      <tr>
+        <th></th>
+        <th class='table-sortable:alphanumeric'><%= t('tbdash_item.item_no') %></th>
+        <th class='table-sortable:alphanumeric'><%= t('tbdash_item.description') %></th>
+        <th class='table-sortable:alphanumeric'><%= t('tbdash_item.vendor_name') %></th>
+        <th class='table-sortable:alphanumeric'><%= t('tbdash_item.status_flag') %></th>
+        <th class='table-sortable:alphanumeric'><%= t('tbdash_item.discontinue_flag') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @search_items.each do |search_item| %>
+        <tr id='row<%= search_item.item_no %>'>
+          <td><%= search_select_receipt_item(search_item, @receipt_item, @receipt_batch) %></td>
+          <td><%= search_item.item_no %></td>
+          <td><%= search_item.description %></td>
+          <td><%= search_item.vendor_name %></td>
+          <td><%= search_item.status_flag %></td>
+          <td><%= search_item.discontinue_flag %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

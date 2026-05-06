@@ -1,0 +1,70 @@
+<script>
+    $(document).ready(function () {
+        pager = $('.page_size_select');
+        pager.val(<%= per_page %>);
+        pager.bind('change', function () {
+            var url = removeURLParams(window.location.href, ['page_size', 'page', 'pageords', 'pagesums']);
+            window.location.href = url + "page=1&page_size=" + this.value;
+        })
+    });
+
+    function removeURLParams(url, params) {
+        var urlparts = url.split('?');
+        if (urlparts.length >= 2) {
+            var pars = urlparts[1].split(/[&;]/g);
+            for (var j = 0; j < params.length; j++) {
+                var prefix = encodeURIComponent(params[j]) + '=';
+                for (var i = pars.length; i-- > 0;) {
+                    if (pars[i].indexOf(prefix, 0) == 0) {
+                        pars.splice(i, 1);
+                    }
+                }
+            }
+            if (pars.length > 0)
+                return urlparts[0] + '?' + pars.join('&') + '&';
+            else
+                return urlparts[0] + '?';
+        } else
+            return url + '?';
+    }
+
+
+</script>
+<!-- page size selector -->
+<%# The container tag
+  - available local variables
+    current_page:  a page object for the currently displayed page
+    total_pages:   total number of pages
+    per_page:      number of items to fetch per page
+    remote:        data-remote
+    paginator:     the paginator that renders the pagination tags inside
+-%>
+<%= paginator.render do -%>
+  <nav aria-label="Page navigation" >
+    <ul class="pagination">
+      <li class="page-item page-link"><%= first_page_tag unless current_page.first? %></li>
+      <li class="page-item page-link"><%= prev_page_tag unless current_page.first? %></li>
+      <% each_page do |page| -%>
+        <% if page.left_outer? || page.right_outer? || page.inside_window? -%>
+          <li class="page-item page-link"><%= page_tag page %></li>
+        <% elsif !page.was_truncated? -%>
+          <li class="page-item page-link"><%= gap_tag %></li>
+        <% end -%>
+      <% end -%>
+      <li class="page-item page-link"><%= next_page_tag unless current_page.last? %></li>
+      <li class="page-item page-link"><%= last_page_tag unless current_page.last? %></li>
+      <li class="page-item page-link"><span class='page_size_selector'>
+    <label><%= I18n.t(:rows_per_page) %></label>
+    <select class='page_size_select'>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="150">150</option>
+      <option value="200">200</option>
+      <option value="300">300</option>
+    </select>
+      </span></li>
+    </ul>
+  </nav>
+<% end %>

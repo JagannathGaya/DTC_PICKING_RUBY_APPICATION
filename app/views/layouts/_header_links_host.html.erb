@@ -1,0 +1,73 @@
+<%= render partial: 'layouts/client_selector' %>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= t('menu.picking') %></span>
+  </button>
+
+  <ul class="dropdown-menu dropdown-menu-right">
+    <% if link_permitted?(orders_path, current_user) || link_permitted?(order_lines_path, current_user) || link_permitted?(picks_path, current_user) %>
+      <li class="dropdown-item">Pick By Order</li>
+    <% end %>
+    <% if link_permitted?(orders_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.orders_link'), orders_path %></li>
+    <% end %>
+    <% if link_permitted?(order_lines_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.lines_link'), order_lines_path %></li>
+    <% end %>
+    <% if link_permitted?(picks_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.pick_link'), picks_path %></li>
+    <% end %>
+    <li role="separator" class="dropdown-divider"></li>
+    <% if 1 == 1 %>
+      <li class="dropdown-item">Pick By Bin</li>
+    <% end %>
+    <% if link_permitted?(binpick_replenishments_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.binpick_replenishments_link'), binpick_replenishments_path %></li>
+    <% end %>
+    <% if link_permitted?(auto_moved_items_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.auto_moved_items_link'), auto_moved_items_path %></li>
+    <% end %>
+    <li role="separator" class="dropdown-divider"></li>
+    <% if link_permitted?(binpick_batches_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.binpick_batch_link'), binpick_batches_path %></li>
+    <% end %>
+    <% if link_permitted?(binpick_bins_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.binpick_pick_link'), new_binpick_bin_path %></li>
+    <% end %>
+    <li role="separator" class="dropdown-divider"></li>
+    <% if link_permitted?(binpick_batches_all_batches_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.binpick_all_batch_link'), binpick_batches_all_batches_path %></li>
+    <% end %>
+   </ul>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= t('menu.host_receipts') %></span>
+  </button>
+
+  <ul class="dropdown-menu dropdown-menu-right">
+    <% if link_permitted?(receipt_batches_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.receipt_batches_link'), receipt_batches_path %></li>
+    <% end %>
+    <% if link_permitted?(receipt_upload_hdrs_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.receipt_upload_link'), receipt_upload_hdrs_path %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= t('menu.finders') %></span>
+  </button>
+
+  <ul class="dropdown-menu dropdown-menu-right">
+    <% if link_permitted?(whouse_items_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.find_item_link'), whouse_items_path %></li>
+    <% end %>
+    <% if link_permitted?(whouse_items_path, current_user) %>
+      <li class="dropdown-item"><%= link_to t('menu.find_bin_link'), new_item_location_path %></li>
+    <% end %>
+  </ul>
+</div>

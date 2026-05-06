@@ -1,0 +1,24 @@
+<section id='binpick_batch'>
+  <div class="card card-default">
+    <div class="card card-heading"><%= t('binpick_batch.edit') %></div>
+    <div class="card card-body">
+      <%#= render :partial => 'layouts/notices' %>
+      <%= bootstrap_form_for [:admin, @binpick_batch], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+        <%= f.hidden_field :lock_version, {:value => @binpick_batch.lock_version} %>
+        <%= f.alert_message t(:correct_errors) %>
+        <%= f.text_field :client_id, label: t('binpick_batch.client_id'), wrapper: {class: 'form-control-sm'}, value: @binpick_batch.client_name, readonly: true %>
+        <% if %W(I O P K).include? @binpick_batch.status %>
+          <%= f.select :user_id,
+                       User.where(user_type: 'host').order(:empno).map { |s| ["#{s.empno} #{s.name}", s.id] },
+                       selected: @binpick_batch.user_id,
+                       label: t('binpick_batch.user_id'), wrapper: {class: 'form-control-sm'} %>
+        <% else %>
+          <%= f.text_field :user_id, label: t('binpick_batch.user_id'), wrapper: {class: 'form-control-sm'}, readonly: true %>
+        <% end %>
+        <%= f.text_field :status, label: t('binpick_batch.status'), wrapper: {class: 'form-control-sm'}, readonly: true,
+                         value: t("binpick_batch.status_list.#{@binpick_batch.status}") %>
+        <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+<div class="card card-default">
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('client.list') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= new_client_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body">
+    <div id='paginator'><%= paginate @clients %></div>
+    <div class="table-responsive">
+      <table width='100%' id='client_list' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('client.cust_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('client.cust_name') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('client.email') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('client.client_manager_email') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('client.database') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('client.username') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('client.password') %></th>
+          <th></th>
+          <th><%= t('client.logo') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @clients.each do |client| %>
+          <tr>
+            <td><%= edit_client_link(client) %></td>
+            <td><%= client.cust_name %></td>
+            <td><%= client.email %></td>
+            <td><%= client.client_manager_email %></td>
+            <td><%= client.database %></td>
+            <td><%= client.username %></td>
+            <td><%= client.password %></td>
+            <td>
+              <%= client_locations_link(client) %>
+              <%= binpick_reset_link(client) %>
+              <%= delete_client_link(client) %>
+            </td>
+            <td><%= image_tag client.logo.url(:thumb) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

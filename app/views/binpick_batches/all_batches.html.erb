@@ -1,0 +1,56 @@
+<div class="card card-default" >
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('binpick_batch.list') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= clear_filters_link(binpick_batches_path) %>
+          <%= home_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body">
+    <div class="table-responsive">
+      <table width='100%' id='binpick_batch_list'
+             class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_batch.user_id') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_batch.client_id') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_batch.status') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_batch.bo_option') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_batch.created_at') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_batch.updated_at') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_batch.start_seq') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_batch.end_seq') %></th>
+        </tr>
+        <tr>
+          <th><%= binpick_batch_user_filter %></th>
+          <th><%= binpick_batch_client_filter %></th>
+          <th><%= binpick_batch_select_status %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @binpick_batches.each do |binpick_batch| %>
+          <tr id='row<%= binpick_batch.id %>'>
+            <td><%= binpick_batch.user_name %></td>
+            <td><%= binpick_batch.client_name %></td>
+            <td><%= t("binpick_batch.status_list.#{binpick_batch.status}") %></td>
+            <td><%= t("binpick_batch.bo_option_list.#{binpick_batch.bo_option}") %></td>
+            <td><%= formatted_date(binpick_batch.created_at) %></td>
+            <td><%= formatted_date(binpick_batch.updated_at) %></td>
+            <td><%= formatted_qty(binpick_batch.start_order_seq) %></td>
+            <td><%= formatted_qty(binpick_batch.end_order_seq) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

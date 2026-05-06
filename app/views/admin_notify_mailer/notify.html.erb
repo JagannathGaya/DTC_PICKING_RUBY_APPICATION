@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<% if @client_id %>
+  <% @client = Client.using('pg').find(@client_id) %>
+  <p><%= @client.cust_no + ' ' + @client.cust_name %></p>
+<% end %>
+<p><%= @error_text %></p>
+
+
+</body>
+</html>

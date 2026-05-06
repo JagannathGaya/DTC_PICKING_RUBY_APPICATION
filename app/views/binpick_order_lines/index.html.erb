@@ -1,0 +1,38 @@
+<div class="card card-default">
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-12"><%= t('binpick_order_line.title_popup', {order_id: @binpick_order.order_seq.to_s.to_i, order_no: @binpick_order.order_display}) %></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id='binpick_order_lines_table' class='example table-autosort table-autofilter table table-striped table-bbinpick_replenishmented table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:numeric'><%= t('binpick_order_line.line_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.item_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.action') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_order_line.qty_shipped') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.pick_type') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.bin_type') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @binpick_order_lines.each do |binpick_order_line| %>
+          <tr class="<%= binpick_order_line_color(binpick_order_line) %>">
+            <td><%= formatted_qty(binpick_order_line.line_no) %></td>
+            <td><%= binpick_order_line.item_display %></td>
+            <td><%= binpick_order_line.action %></td>
+            <td><%= formatted_qty(binpick_order_line.qty_shipped) %></td>
+            <td><%= binpick_order_line.pick_type %></td>
+            <td><%= binpick_order_line.bin_type %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+

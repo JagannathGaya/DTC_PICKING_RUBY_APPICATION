@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<%= t('receipt_item.new_line_title', { batch: @batch_title }) %>
+
+<%= t('receipt_item.mail_tbrc_body') %>
+
+<%= t('receipt_batch.client_id') %> : <%= @client.cust_name %>
+<%= t('receipt_item.item_no') %> : <%= @receipt_item.item_no %>
+<%= t('receipt_item.description') %> : <%= @receipt_item.description %>
+<%= t('receipt_batch.dock_receipt_at') %> : <%= @receipt_batch.dock_receipt_at %>
+<%= t('receipt_batch.empno') %> : <%= @receipt_item.empno %>
+
+<%= t('receipt_item.mail_tbrc_comment') %>
+<%= @comment_text %>
+
+</body>
+</html>

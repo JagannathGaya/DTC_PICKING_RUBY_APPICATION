@@ -1,0 +1,26 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+first:
+  cust_no: FIRST
+  cust_name: First Client
+  email: firstclient@example.com
+  database: orcl
+  username: INT901
+  password: INT901
+  client_manager_email: client_manager@example.com
+second:
+  cust_no: SECOND
+  cust_name: Second Client
+  email: secondclient@example.com
+  database: orcl
+  username: INT902
+  password: INT902
+  client_manager_email: second_client_manager@example.com
+third:
+  cust_no: THIRD
+  cust_name: Third Client
+  email: thirdclient@example.com
+  database: orcl
+  username: INT903
+  password: INT903
+  client_manager_email: third_client_manager@example.com

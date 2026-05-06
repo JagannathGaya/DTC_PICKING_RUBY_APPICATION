@@ -1,0 +1,100 @@
+<div class="card card-default">
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= "#{@runmode == 'consume' ? 'Consume ' : ''} #{t('receipt_upload_hdr.title')}" %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= clear_filters_link(receipt_upload_hdrs_path) %>
+          <%= home_link %>
+          <%= back_link %>
+          <%= new_receipt_upload_hdr_link unless @runmode == 'consume' %>
+        </div>
+      </div>
+    </div>
+    <% if @receiving_note %>
+      <div class="row">
+        <div class="col-md-11 col-md-offset-1"><%= @receiving_note %></div>
+      </div>
+    <% end %>
+  </div>
+  <div class="card card-body">
+    <div id='paginator'><%= paginate @receipt_upload_hdrs %></div>
+    <div class="table-responsive">
+      <table width='100%' id='receipt_upload_hdr_table'
+             class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_hdr.id') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_hdr.upload_status') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_hdr.po_ref') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_hdr.vendor_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_hdr.delivery_type') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_hdr.tracking_ref') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_hdr.dt_expected') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_upload_hdr.hr_expected') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_upload_hdr.numrows') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_upload_hdr.boxcount') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_upload_hdr.actual_boxcount') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_hdr.notes') %></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <th><%= receipt_upload_status_filter %></th>
+          <th>
+            <input id='receipt_upload_po_ref_filter' value=<%= raw("\"#{session[:filter]['receipt_upload_po_ref_filter']}\" class='uppercase' style='width: 90%;' ") %>/>
+          </th>
+          <th><%= receipt_upload_vendor_filter %></th>
+          <th><%= receipt_upload_delivery_type_filter %></th>
+          <th></th>
+          <th>
+            <input id='rudt_expected_date1_filter' class='datepicker uppercase' style='width: 80px;' value=<%= raw("\"#{session[:filter]['rudt_expected_date1_filter']}\" ") %>/>
+            <input id='rudt_expected_date2_filter' class='datepicker uppercase' style='width: 80px;' value=<%= raw("\"#{session[:filter]['rudt_expected_date2_filter']}\" ") %>/>
+          </th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @receipt_upload_hdrs.each do |receipt_upload_hdr| %>
+          <tr id='row<%= receipt_upload_hdr.id %>'>
+            <td><%= receipt_upload_hdr.id %></td>
+            <td><%= receipt_upload_hdr.upload_status %></td>
+            <td><%= receipt_upload_hdr.po_ref %></td>
+            <td><%= receipt_upload_hdr.vendor_no %></td>
+            <td><%= receipt_upload_hdr.delivery_type %></td>
+            <td><%= receipt_upload_hdr.tracking_ref %></td>
+            <td><%= formatted_date(receipt_upload_hdr.dt_expected, :display) %></td>
+            <td><%= receipt_upload_hdr.hr_expected %></td>
+            <td><%= receipt_upload_hdr.receipt_upload_dtls.size %></td>
+            <td><%= receipt_upload_hdr.boxcount %></td>
+            <td><%= receipt_upload_hdr.actual_boxcount %></td>
+            <td><%= receipt_upload_hdr.notes? %></td>
+            <td>
+            <% if @runmode == 'consume' %>
+              <%= create_batch_from_receipt_upload_hdr_link(receipt_upload_hdr) %>
+              <%= view_receipt_upload_hdr_link(receipt_upload_hdr, @runmode) %>
+            <% else %>
+              <%= edit_receipt_upload_hdr_link(receipt_upload_hdr) %>
+              <%= view_receipt_upload_hdr_link(receipt_upload_hdr, @runmode) %>
+              <%= delete_receipt_upload_hdr_link(receipt_upload_hdr) %>
+            <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="float-left">
+          <%= home_link %>
+          <%= back_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+     

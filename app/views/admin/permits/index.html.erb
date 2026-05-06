@@ -1,0 +1,50 @@
+<div class="card card-default">
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('permit.list') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= clear_filters_link(admin_permits_path) %>
+          <%= home_link %>
+          <%= new_permit_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='paginator'><%= paginate @permits %></div>
+    <div class="table-responsive">
+      <table width='100%' id='permit_list' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('permit.report_name') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('permit.client_id') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('permit.user_id') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('permit.allow') %></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th><%= permit_report_filter %></th>
+          <th><%= permit_client_filter %></th>
+          <th><%= permit_user_filter %></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @permits.each do |permit| %>
+          <tr id='row<%= permit.id %>'>
+            <td><%= edit_permit_link(permit) %></td>
+            <td><%= permit_display_client(permit) %></td>
+            <td><%= permit_display_user(permit) %></td>
+            <td><%= permit.allow %></td>
+            <td>
+              <%= delete_permit_link(permit) %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

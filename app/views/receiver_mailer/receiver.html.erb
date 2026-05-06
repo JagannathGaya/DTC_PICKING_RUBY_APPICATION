@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<%= t('receipt_item.title', {batch: @batch_title}) %>
+
+
+    <table cellpadding="0" cellspacing="0" border="0" align="center">
+      <thead>
+      <tr>
+        <th  style='width: 200px; vertical-align: top'><%= t('receipt_item.item_no') %></th>
+        <th  style='width: 200px; vertical-align: top'><%= t('receipt_item.description') %></th>
+        <th  style='width: 100px; vertical-align: top; text-align: right'><%= t('receipt_item.boxcount') %></th>
+        <th  style='width: 100px; vertical-align: top; text-align: right'><%= t('receipt_item.quantity') %></th>
+        <th  style='width: 100px; vertical-align: top; text-align: right'><%= t('receipt_item.qty_remaining') %></th>
+        <th  style='width: 200px; vertical-align: top'><%= t('receipt_item.note') %></th>
+        <th  style='width: 200px; vertical-align: top'><%= t('receipt_item.comment') %></th>
+        <th  style='width: 100px; vertical-align: top; text-align: right'><%= t('receipt_item.discontinue_flag') %></th>
+        <th  style='width: 100px; vertical-align: top'><%= t('receipt_item.shipment_no') %></th>
+        <th  style='width: 100px; vertical-align: top; text-align: right'><%= t('receipt_item.shipment_line') %></th>
+        <th  style='width: 100px; vertical-align: top'><%= t('receipt_item.shipment_date') %></th>
+        <th  style='width: 100px; vertical-align: top; text-align: right'><%= t('receipt_item.qty_shipped') %></th>
+        <th  style='width: 350px; vertical-align:top; text-align: center'><%= t('receipt_item.putaway') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @receipt_items.each do |receipt_item| %>
+        <tr>
+          <td style='width: 200px; vertical-align:top'><%= receipt_item.item_no %></td>
+          <td style='width: 200px; vertical-align:top'><%= receipt_item.description %></td>
+          <td style='width: 100px; vertical-align:top; text-align: right'><%= receipt_item.boxcount %></td>
+          <td style='width: 100px; vertical-align:top; text-align: right'><%= receipt_item.quantity %></td>
+          <td style='width: 100px; vertical-align:top; text-align: right'><%= receipt_item.qty_remaining %></td>
+          <td style="width: 200px; vertical-align:top; <%= receipt_item.status_flag ? 'color:black' : 'color:red' %>"><%= receipt_item.note %></td>
+          <td style='width: 200px; vertical-align:top'><%= t('receipt_item.comment') %><%= receipt_item.comment %></td>
+          <td  style='width: 100px; vertical-align:top; text-align: right'><%= receipt_item.discontinue_flag %></td>
+          <th  style='width: 100px; vertical-align: top'><%= receipt_item.shipment_no %></th>
+          <th  style='width: 100px; vertical-align: top; text-align: right'><%= receipt_item.shipment_line %></th>
+          <th  style='width: 100px; vertical-align: top'><%= receipt_item.shipment_date %></th>
+          <th  style='width: 100px; vertical-align: top; text-align: right'><%= receipt_item.qty_shipped %></th>
+          <td style='width: 350px; vertical-align:top; text-align: right'>
+            <table style='text-align: right; border-width: 0; border-spacing: 0'>
+              <% receipt_item.receipt_locations.each do |receipt_location| %>
+                <tr>
+                  <td style="width: 80px; vertical-align: top; text-align: right"><%= receipt_location.stock_area %>-<%= receipt_location.bin_loc %></td>
+                  <td style="width: 80px; vertical-align: top; text-align: right"><%= receipt_location.quantity %></td>
+                  <td style="width: 80px; vertical-align: top; text-align: center"><%= receipt_location.new_default ? 'Y' : 'N' %></td>
+                  <td style="width: 80px; vertical-align: top; text-align: right"><%= receipt_location.defloc_action %></td>
+                </tr>
+              <% end %>
+            </table>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+
+</body>
+</html>

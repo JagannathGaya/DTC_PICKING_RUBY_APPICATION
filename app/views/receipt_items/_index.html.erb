@@ -1,0 +1,60 @@
+<div class="card card-default">
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('receipt_item.title', {batch: @receipt_batch.id.to_s + ' ' + @receipt_batch.note}) %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= list_receipt_batches_link %>
+          <%= putaway_link(@receipt_batch) %>
+          <%= close_receipt_batch_link(@receipt_batch) %>
+          <%= new_receipt_item_link(@receipt_batch) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body">
+    <div>
+      <div id='paginator'><%= paginate @receipt_items %></div>
+      <table width='100%' id='receipt_item_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.item_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.description') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_item.boxcount') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_item.quantity') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_item.qty_remaining') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.note') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.comment') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.status_flag') %></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @receipt_items.each do |receipt_item| %>
+          <tr id='row<%= receipt_item.id %>'>
+            <td><%= edit_receipt_item_link(receipt_item) %></td>
+            <td><%= display_description(receipt_item.description) %></td>
+            <td><%= receipt_item.boxcount %></td>
+            <td><%= receipt_item.quantity %></td>
+            <td><%= receipt_item.qty_remaining %></td>
+            <td><%= receipt_item.note %></td>
+            <td><%= receipt_item.comment %></td>
+            <td><%= extended_status(receipt_item) %></td>
+            <td><%= delete_receipt_item_link(receipt_item) %></td>
+            <td><%= edit_receipt_item_label_link(receipt_item) if receipt_item.valid_item? %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="float-left">
+          <%= home_link %>
+          <%= list_receipt_batches_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+     

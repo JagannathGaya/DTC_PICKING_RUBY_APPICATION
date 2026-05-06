@@ -1,0 +1,43 @@
+<div class="card card-default" style='max-width: 1000px; margin: auto;'>
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-6"><%= t('whouse_inv.title', item_no: @whouse_item.item_no) %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+         </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id='whouse_invs_table' class='example table-autosort table-autofilter table table-striped table-b whouse_inved table-hover table-sm  mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_inv.area_bin') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_inv.is_default') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_inv.qty_on_hand') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_inv.stock_um') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('whouse_inv.vendor_name') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @whouse_invs.each do |whouse_inv| %>
+          <tr class="<%= whouse_inv_is_default_class(whouse_inv) %>" >
+            <td><%= search_get_items(whouse_inv.area_bin) %></td>
+            <td><%= whouse_inv.is_default %></td>
+            <td><%= formatted_qty(whouse_inv.qty_on_hand) %></td>
+            <td><%= whouse_inv.stock_um %></td>
+            <td><%= whouse_inv.vendor_name %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

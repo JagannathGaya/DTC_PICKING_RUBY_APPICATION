@@ -1,0 +1,54 @@
+<div class="card card-default" style='max-width: 1300px; margin: auto;'>
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-6"><h3><%= t('binpick_order_line.wave_picks_title', batch_id: @binpick_batch.id) %></h3></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= clear_filters_link(binpick_wave_picks_path(@binpick_batch)) %>
+          <%= home_link %>
+          <%= link_to t('binpick_order_line.wave_to_bin'), new_binpick_bin_path, class: 'btn btn-sm btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id='binpick_order_lines_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.wave_order_seq') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.item_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.item_desc') %></th>
+          <th class='table-sortable:numeric'><%= t('binpick_order_line.qty_shipped') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.stock_area') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('binpick_order_line.bin_loc') %></th>
+          <th class='table-nosort'></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% firstrow = true %>
+        <% @binpick_order_lines.each do |order_line| %>
+          <% order_show = 'Order: ' + order_line.order_no.to_i.to_s + '-' + order_line.order_suffix.to_i.to_s + '/' + order_line.line_no.to_i.to_s %>
+          <tr class="<%= binpick_tr_class(order_line, firstrow) %>" id='<%= order_line.id.to_s %>'
+              data-toggle="tooltip" trigger="focus hover"
+              title="<%= order_show %>">
+            <td class="align-middle" style="width: 50%;"><%= binpick_wave_confirm_order_line(order_line, firstrow) %>
+              <%= binpick_wave_unconfirm_order_line(order_line, firstrow) %></td>
+            <td class="align-middle h3" ontouchstart='alert("<%= order_show %>");' onclick='alert("<%= order_show %>");'>
+              <%= order_line.item_no %></td>
+            <td class="align-middle h3" ontouchstart='alert("<%= order_show %>");' onclick='alert("<%= order_show %>");'>
+              <%= order_line.item_desc %></td>
+            <td  <%= order_line_qty_td(order_line) %> ontouchstart='alert("<%= order_show %>");' onclick='alert("<%= order_show %>");'>
+              <%= wave_line_qty(order_line) %>
+            </td>
+            <td class="align-middle h3"><%= order_line.stock_area %></td>
+            <td class="align-middle h3"><%= order_line.bin_loc %></td>
+            <td class="align-middle h3"><%= binpick_wave_line_backorder(order_line) %></td>
+          </tr>
+          <% firstrow = false %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

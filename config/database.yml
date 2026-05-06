@@ -1,0 +1,139 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: tbcorp_development
+  username: postgres
+  password: root
+  host: localhost
+  pool: 5
+
+lonnie_dev:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbcorp_development
+  username: postgres
+  password: admin
+  host: 192.168.0.12
+  port: 5432
+
+lonnie_prod:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbcorp_lonnie_prod
+  username: postgres
+  password: root
+  host: localhost
+  pool: 5
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbcorp_test
+  username: postgres
+  password: admin
+  host: localhost
+  pool: 5
+
+demo:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbcorp_demo
+  username: postgres
+  password: marquette
+  pool: 5
+
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbcorp_production
+  username: postgres
+  password: marquette
+  pool: 5
+
+tbp_lonnie_dev:
+  adapter: oracle_enhanced
+  database: 192.168.0.11:1521/ndsnw
+  username: production
+  password: vistadome
+  pool: 5
+
+tbp_lonnie_prod:
+  adapter: oracle_enhanced
+  database: 192.168.0.11:1521/ndsnw
+  username: int901
+  password: int901
+  pool: 5
+
+tbp_dev:
+  adapter: oracle_enhanced
+  database: orcl
+  username: production
+  password: vistadome
+  pool: 5
+
+tbp_demo:
+  adapter: oracle_enhanced
+  database: TB-ORACLE-DB01.corp.thbred.com:1521/tb10g
+  username: tbpick_demo
+  password: tbpick_demo
+  pool: 5
+
+tbp_production:
+  adapter: oracle_enhanced
+  database: TB-ORACLE-DB01.corp.thbred.com:1521/tb10g
+  username: tbpick
+  password: tbpick
+  pool: 5
+
+tbdash_development:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbdash_development
+  username: postgres
+  password: admin
+  host: localhost
+  pool: 5
+
+tbdash_lonnie_dev:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbdash_development
+  username: postgres
+  password: admin
+  host: 192.168.0.12
+  port: 5432
+
+tbdash_lonnie_prod:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbdash_lonnie_prod
+  username: postgres
+  password: admin
+  host: localhost
+  pool: 5
+
+tbdash_test:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbdash_test
+  username: postgres
+  password: admin
+  host: localhost
+  pool: 5
+
+tbdash_demo:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbdash_demo
+  username: postgres
+  password: marquette
+  pool: 5
+
+tbdash_production:
+  adapter: postgresql
+  encoding: utf8
+  database: db/tbdash_production
+  username: postgres
+  password: marquette
+  pool: 16

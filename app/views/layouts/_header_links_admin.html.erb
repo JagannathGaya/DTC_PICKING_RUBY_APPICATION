@@ -1,0 +1,36 @@
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= t('menu.maintenance') %></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li class="dropdown-item"><%= link_to t('admin.users_link'), admin_users_path %></li>
+    <li class="dropdown-item"><%= link_to t('admin.clients_link'), admin_clients_path %></li>
+    <li class="dropdown-item"><%= link_to t('admin.permits_link'), admin_permits_path %></li>
+    <li role="separator" class="dropdown-divider"></li>
+    <li class="dropdown-item"><%= link_to t('admin.binpick_batches_link'), admin_binpick_batches_path %></li>
+  </ul>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= t('menu.processes') %></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li class="dropdown-item"><%= link_to t('admin.jobs_link'), admin_delayed_jobs_path %></li>
+  </ul>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= t('menu.performance') %></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right">
+    <li class="dropdown-item"><%= link_to t('admin.perf_detail_link'), admin_page_requests_path %></li>
+    <li role="separator" class="dropdown-divider"></li>
+    <li class="dropdown-item"><%= link_to t('admin.perf_method_hits_link'), method_hits_admin_page_requests_path %></li>
+    <li class="dropdown-item"><%= link_to t('admin.perf_db_runtimes_link'), db_runtimes_admin_page_requests_path %></li>
+    <li role="separator" class="dropdown-divider"></li>
+    <li class="dropdown-item"><%= link_to t('admin.log_requests_link'), admin_log_requests_path %></li>
+    <li class="dropdown-item"><%= link_to t('admin.log_errors_link'), routing_failures_admin_log_requests_path %></li>
+  </ul>
+</div>

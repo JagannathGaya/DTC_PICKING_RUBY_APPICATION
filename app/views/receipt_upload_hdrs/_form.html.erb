@@ -1,0 +1,74 @@
+<section id='receipt_upload_hdr'>
+  <div class="card card-default">
+    <div class="card card-heading"><%= "#{@receipt_upload_hdr.id ? t('receipt_upload_hdr.edit') + ': ' + @receipt_upload_hdr.id.to_s : t('receipt_upload_hdr.new') }" %></div>
+    <div class="card card-body">
+      <%= bootstrap_form_for [@receipt_upload_hdr], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+        <%= f.hidden_field :lock_version, {:value => @receipt_upload_hdr.lock_version} %>
+        <%= f.hidden_field :client_id, {:value => @receipt_upload_hdr.client_id} %>
+        <%= f.error_messages %>
+        <% unless @receipt_upload_hdr.id %>
+          <%= f.text_field :upload_status, label: t('receipt_upload_hdr.upload_status'), value: "#{@receipt_upload_hdr.upload_status}", readonly: true, wrapper: {class: 'form-control-sm'} %>
+        <% else %>
+          <%= f.select :upload_status, ReceiptUploadHdr::UPLOAD_STATUSES,
+                       selected: @receipt_upload_hdr.upload_status,
+                       prompt: t('select'), label: t('receipt_upload_hdr.upload_status'), wrapper: {class: 'form-control-sm'} %>
+        <% end %>
+        <%= f.text_field :po_ref, label: t('receipt_upload_hdr.po_ref'), autocomplete: 'off', wrapper: {class: 'form-control-sm'}, class: 'uppercase' %>
+        <%= f.select :vendor_no,
+                     @tbdash_vendors.map {|s| ["#{s.vendor_name} (#{s.vendor_no})", s.vendor_no]},
+                     selected: @receipt_upload_hdr.vendor_no,
+                     prompt: t(:select), label: t('receipt_upload_hdr.vendor_no'), wrapper: {class: 'form-control-sm'} %>
+        <%= f.select :delivery_type, ReceiptUploadHdr::DELIVERY_TYPES,
+                     selected: @receipt_upload_hdr.delivery_type,
+                     prompt: t('select'), label: t('receipt_upload_hdr.delivery_type'), wrapper: {class: 'form-control-sm'} %>
+        <%= f.text_field :tracking_ref, label: t('receipt_upload_hdr.tracking_ref'), autocomplete: 'off', wrapper: {class: 'form-control-sm'}, class: 'uppercase' %>
+        <% if @receipt_upload_hdr.id %>
+          <%= f.text_field :filename, label: t('receipt_upload_hdr.filename'), wrapper: {class: 'form-control-sm'}, readonly: true %>
+        <% else %>
+          <%= f.file_field :filename, label: t('receipt_upload_hdr.filename'), autocomplete: 'off', wrapper: {class: 'form-control-sm'} %>
+          <div>
+            <p>
+              The upload file MUST be a CSV file with a header row.<br>
+              The header row MUST contain "ITEM,QUANTITY,BOXCOUNT".<br>
+              Blank rows are ignored.<br>
+              Each row MUST contain an Item number, the quantity, and the box count separated by commas.<br>
+              Duplicate Item numbers are ignored.
+            </p>
+          </div>
+        <% end %>
+        <%= f.number_field :actual_boxcount, min: 0, step: 1, label: t('receipt_upload_hdr.actual_boxcount'), wrapper: {class: 'form-control-sm'}, style: "width:80px;", readonly: true %>
+        <%= f.number_field :boxcount, min: 0, step: 1, label: t('receipt_upload_hdr.boxcount'), wrapper: {class: 'form-control-sm'}, style: "width:80px;" %>
+        <%= f.date_select :dt_expected, label: t('receipt_upload_hdr.dt_expected'), autocomplete: 'off', wrapper: {class: 'form-control-sm'}, class: 'datepicker' %>
+        <%= f.number_field :hr_expected, min: 0, max: 23, step: 1, label: t('receipt_upload_hdr.hr_expected'), wrapper: {class: 'form-control-sm'}, style: "width:80px;" %>
+        <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+    </div>
+  </div>
+</section>
+<script>
+    $(document).ready(function () {
+//    Monster hack because of turbolinks. erb files not re-evaluated on server hit. oh well...
+        var myLocale = location.pathname.split('/')[1];
+        if (jQuery.inArray(myLocale, ['en', 'es']) == -1) {
+            myLocale = 'en';
+        }
+//    $.timepicker.setDefaults($.timepicker.regional[myLocale]);
+//   Hack because jquery datepicker expects English to be ''
+        if (myLocale == 'en') {
+            myLocale = '';
+        }
+        $.datepicker.setDefaults($.datepicker.regional[myLocale]);
+        $('.datepicker').datepicker({
+            dateFormat: 'dd-M-yy',
+            changeMonth: true,
+            changeYear: true,
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            showAnim: "fold",
+            beforeShow: function () {
+                $('.ui-datepicker').css('font-size', '82.5%');
+            }
+        });
+
+    });
+</script>

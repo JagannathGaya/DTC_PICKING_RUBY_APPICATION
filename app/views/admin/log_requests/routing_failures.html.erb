@@ -1,0 +1,44 @@
+<div class="card card-default">
+  <div class="card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('admin.logs.title_errors') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= clear_filters_link(routing_failures_admin_log_requests_path) %>
+          <%= home_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='paginator'><%= paginate @routing_failures %></div>
+    <div class="table-responsive">
+      <table width='100%' id='log_errors_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th><%= t('admin.logs.logfile') %></th>
+          <th><%= t('admin.logs.logged_at') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.logs.action') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.logs.request') %></th>
+        </tr>
+        <tr>
+          <th><%= logfile_filter %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @routing_failures.each do |line| %>
+          <tr>
+            <td><%= line.logfile %></td>
+            <td><%= formatted_time(line.logged_at, :edit) %></td>
+            <td><%= line.action %></td>
+            <td><%= line.request %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

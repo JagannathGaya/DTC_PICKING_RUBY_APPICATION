@@ -1,0 +1,15 @@
+<section id='registration'>
+  <div class="card card-default">
+    <div class="card-heading"><%= "#{t('user.sign_up')}" %></div>
+    <div class="card-body">
+      <%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.email_field :email, label: t('user.email'), autofocus: true, required: true, wrapper: { class: 'form-control-sm' } %>
+        <%= f.password_field :password, label: t('user.password'), class: 'required' %>
+        <%= f.password_field :password_confirmation, label: t('user.password_confirmation'), class: 'required' %>
+        <%= f.submit t('user.sign_up'), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</section>

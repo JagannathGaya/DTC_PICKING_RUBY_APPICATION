@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render "layouts/window_title" %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+        crossorigin="anonymous">
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="container" class="container-fluid">
+  <%= render "layouts/notices" %>
+  <%= render "layouts/page_header" %>
+  <%= yield %>
+  <%= render "layouts/page_footer" %>
+</div>
+</body>
+</html>

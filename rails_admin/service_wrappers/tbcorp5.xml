@@ -1,0 +1,13 @@
+<service>
+      <id>tbcorp5</id>
+      <name>tbcorp5 Port 3017</name>
+      <description>Pick Application 2 </description>
+      <executable>C:\Ruby26-x64\bin\ruby.exe</executable>
+      <workingdirectory>C:\rails_projects\tbcorp</workingdirectory>
+      <argument>C:\Ruby26-x64\bin\bundle</argument>
+      <argument>exec</argument>
+      <argument>C:\Ruby26-x64\bin\puma</argument>
+      <argument>-eproduction</argument>
+      <argument>-p3017</argument>
+      <logpath>C:\rails_projects\tbcorp\log</logpath>
+</service>

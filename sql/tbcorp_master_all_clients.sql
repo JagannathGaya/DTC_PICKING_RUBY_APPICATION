@@ -1,0 +1,107 @@
+spool c:\temp\tcorp_master_all_clients                                          
+
+SP2-0042: unknown command "union all" - rest of line ignored.
+@@tbpick_master_grants ADA860                                                   
+@@tbpick_master_grants AIS865                                                   
+@@tbpick_master_grants ARC805                                                   
+@@tbpick_master_grants ATT630                                                   
+@@tbpick_master_grants BLU830                                                   
+@@tbpick_master_grants CAB815                                                   
+@@tbpick_master_grants CAR800                                                   
+@@tbpick_master_grants CRB840                                                   
+@@tbpick_master_grants CRY900                                                   
+@@tbpick_master_grants DES875                                                   
+@@tbpick_master_grants DWR540                                                   
+@@tbpick_master_grants FAB810                                                   
+@@tbpick_master_grants FIL904                                                   
+@@tbpick_master_grants FOU903                                                   
+@@tbpick_master_grants FRI855                                                   
+@@tbpick_master_grants FYP200                                                   
+@@tbpick_master_grants GUI820                                                   
+@@tbpick_master_grants HAR835                                                   
+@@tbpick_master_grants HAW440                                                   
+@@tbpick_master_grants HBF845                                                   
+@@tbpick_master_grants HDC470                                                   
+@@tbpick_master_grants HDH170                                                   
+@@tbpick_master_grants HMI100                                                   
+@@tbpick_master_grants HUM480                                                   
+@@tbpick_master_grants INS895                                                   
+@@tbpick_master_grants INT901                                                   
+@@tbpick_master_grants KIC400                                                   
+@@tbpick_master_grants KNL520                                                   
+@@tbpick_master_grants KNT530                                                   
+@@tbpick_master_grants LEB740                                                   
+@@tbpick_master_grants MAI885                                                   
+@@tbpick_master_grants NAS890                                                   
+@@tbpick_master_grants NOM420                                                   
+@@tbpick_master_grants OMN880                                                   
+@@tbpick_master_grants PAZ220                                                   
+@@tbpick_master_grants POB250                                                   
+@@tbpick_master_grants RAB750                                                   
+@@tbpick_master_grants SER825                                                   
+@@tbpick_master_grants SIT160                                                   
+@@tbpick_master_grants SOU850                                                   
+@@tbpick_master_grants SPL780                                                   
+@@tbpick_master_grants SRC902                                                   
+@@tbpick_master_grants STL380                                                   
+@@tbpick_master_grants STX870                                                   
+@@tbpick_master_grants TEN130                                                   
+@@tbpick_master_grants TRE510                                                   
+@@tbpick_master_grants ULA360                                                   
+@@tbpick_master_grants ZAV790                                                   
+
+48 rows selected.
+
+@@tbpick_client_synonyms ADA860                                                 
+@@tbpick_client_synonyms AIS865                                                 
+@@tbpick_client_synonyms ARC805                                                 
+@@tbpick_client_synonyms ATT630                                                 
+@@tbpick_client_synonyms BLU830                                                 
+@@tbpick_client_synonyms CAB815                                                 
+@@tbpick_client_synonyms CAR800                                                 
+@@tbpick_client_synonyms CRB840                                                 
+@@tbpick_client_synonyms CRY900                                                 
+@@tbpick_client_synonyms DES875                                                 
+@@tbpick_client_synonyms DWR540                                                 
+@@tbpick_client_synonyms FAB810                                                 
+@@tbpick_client_synonyms FIL904                                                 
+@@tbpick_client_synonyms FOU903                                                 
+@@tbpick_client_synonyms FRI855                                                 
+@@tbpick_client_synonyms FYP200                                                 
+@@tbpick_client_synonyms GUI820                                                 
+@@tbpick_client_synonyms HAR835                                                 
+@@tbpick_client_synonyms HAW440                                                 
+@@tbpick_client_synonyms HBF845                                                 
+@@tbpick_client_synonyms HDC470                                                 
+@@tbpick_client_synonyms HDH170                                                 
+@@tbpick_client_synonyms HMI100                                                 
+@@tbpick_client_synonyms HUM480                                                 
+@@tbpick_client_synonyms INS895                                                 
+@@tbpick_client_synonyms INT901                                                 
+@@tbpick_client_synonyms KIC400                                                 
+@@tbpick_client_synonyms KNL520                                                 
+@@tbpick_client_synonyms KNT530                                                 
+@@tbpick_client_synonyms LEB740                                                 
+@@tbpick_client_synonyms MAI885                                                 
+@@tbpick_client_synonyms NAS890                                                 
+@@tbpick_client_synonyms NOM420                                                 
+@@tbpick_client_synonyms OMN880                                                 
+@@tbpick_client_synonyms PAZ220                                                 
+@@tbpick_client_synonyms POB250                                                 
+@@tbpick_client_synonyms RAB750                                                 
+@@tbpick_client_synonyms SER825                                                 
+@@tbpick_client_synonyms SIT160                                                 
+@@tbpick_client_synonyms SOU850                                                 
+@@tbpick_client_synonyms SPL780                                                 
+@@tbpick_client_synonyms SRC902                                                 
+@@tbpick_client_synonyms STL380                                                 
+@@tbpick_client_synonyms STX870                                                 
+@@tbpick_client_synonyms TEN130                                                 
+@@tbpick_client_synonyms TRE510                                                 
+@@tbpick_client_synonyms ULA360                                                 
+@@tbpick_client_synonyms ZAV790                                                 
+
+48 rows selected.
+
+spool off                                                                       
+

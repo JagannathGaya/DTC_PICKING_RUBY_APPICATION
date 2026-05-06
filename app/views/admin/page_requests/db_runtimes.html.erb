@@ -1,0 +1,39 @@
+<%#= javascript_include_tag "https://www.google.com/jsapi" %>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawChart);
+    var data_body = <%= @db_times.to_s.html_safe %>;
+    var data_hdr = [['Controller Action', 'Avg Time', {role: 'annotation'}]];
+    var data_all = data_hdr.concat(data_body);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(data_all);
+        var view = new google.visualization.DataView(data);
+        var options = {
+            title: '<%= t('admin.page_request.db_runtimes') %>',
+            width: 800,
+            height: 400,
+            bar: {groupWidth: "95%"},
+            legend: {position: 'none'}
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('barchart_values'));
+        chart.draw(view, options);
+    }
+</script>
+<div class="card card-default">
+  <div class="card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('admin.page_request.db_runtimes') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <input type='button' class='btn btn-primary  btn-sm' value='<%= t('admin.view_chart') %>' onClick='window.location.reload()'>
+          <%= home_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='barchart_values'></div>
+  </div>
+</div>
+

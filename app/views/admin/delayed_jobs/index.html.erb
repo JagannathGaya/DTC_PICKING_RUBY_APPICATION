@@ -1,0 +1,76 @@
+<div class="card card-default">
+  <div class="card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('admin.jobs.title') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= job_bootstrap_link %>
+          <%= job_test_email_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id='delayed_job_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th><%= t('admin.jobs.priority_hdr') %></th>
+          <th><%= t('admin.jobs.attempts_hdr') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.jobs.handler_hdr') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.jobs.last_error_hdr') %></th>
+          <th><%= t('admin.jobs.run_at_hdr') %></th>
+          <th><%= t('admin.jobs.locked_at_hdr') %></th>
+          <th><%= t('admin.jobs.failed_at_hdr') %></th>
+          <th><%= t('admin.jobs.locked_by_hdr') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.jobs.queue_hdr') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('admin.jobs.client_name') %></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="table-filterable"></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @delayed_jobs.each do |job| %>
+          <tr>
+            <td><%= job.priority %></td>
+            <td><%= job.attempts %></td>
+            <td>
+              <span style="color: blue;" onclick="toggle_text('handler',<%= job.id.to_s %>);"><%= icon('binoculars') %></span>
+              <%= job.display_handler %>
+              <span style="display: none;" id="handler<%= job.id.to_s %>"><%= job.handler&.html_safe %></span>
+            </td>
+            <td>
+              <span style="color: blue;" onclick="toggle_text('error',<%= job.id.to_s %>);"><%= icon('binoculars') %></span>
+              <%= job.display_last_error %>
+              <span style="display: none;" id="error<%= job.id.to_s %>"><%= job.last_error&.html_safe %></span>
+            </td>
+            <td><%= job.display_run_at %></td>
+            <td><%= job.display_locked_at %></td>
+            <td><%= job.display_failed_at %></td>
+            <td><%= job.locked_by %></td>
+            <td><%= job.queue %></td>
+            <td><%= job.cust_name %></td>
+            <td><%= job_delete_link(job) %></td>
+            <td><%= job_execute_link(job) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

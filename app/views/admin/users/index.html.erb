@@ -1,0 +1,64 @@
+<div class="card card-default">
+  <div class="card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('user.list') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= clear_filters_link(admin_users_path) %>
+          <%= home_link %>
+          <%= new_user_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='paginator'><%= paginate @users %></div>
+    <div class="table-responsive">
+      <table width='100%' id='user_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('user.email') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('user.user_type') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('user.empno') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('user.client') %></th>
+          <th class='table-sortable:date'><%= t('user.first_seen') %></th>
+          <th><%= t('user.last_seen') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('user.locale') %></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>
+            <input id='user_email_filter' autofocus='autofocus' value=<%= raw("\"#{session[:filter]['user_email_filter']}\"") %>/>
+          </th>
+          <th><%= user_type_filter %></th>
+          <th>
+            <input id='user_empno_filter' autofocus='autofocus' value=<%= raw("\"#{session[:filter]['user_empno_filter']}\"") %>/>
+          </th>
+          <th><%= user_client_filter %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+          <tr id='row<%= user.id %>' class="<%= user_row_color(user) %>">
+            <td><%= edit_user_link(user) %></td>
+            <td><%= user.display_user_type %></td>
+            <td><%= user.empno %></td>
+            <td><%= user.display_client %></td>
+            <td><%= formatted_time(user.created_at, :date) %></td>
+            <td><%= last_seen(user) %></td>
+            <td><%= user.locale %></td>
+            <td><%= delete_user_link(user) %></td>
+            <td><%= impersonate_link(user) %><%= user_unlock_link(user) %> <%= user_pick_release_link(user) %> <%= copy_permit_link(user) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="card card-default" >
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('receipt_upload_dtl.title', {po_ref: @receipt_upload_hdr.po_ref}) %></div>
+      <div class="col-md-1"><%= home_link %></div>
+      <div class="col-md-5"><%= list_receipt_upload_hdrs_link(@runmode) %></div>
+    </div>
+  </div>
+  <div class="card card-body">
+    <div id='paginator'><%= paginate @receipt_upload_dtls %></div>
+    <div class="table-responsive">
+      <table width='100%' id='receipt_upload_dtl_table'
+             class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:numeric'><%= t('receipt_upload_dtl.line_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_dtl.item_no') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_upload_dtl.quantity') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_upload_dtl.boxcount') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_dtl.vendor_id') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_dtl.po_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_dtl.shipment_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_dtl.shipment_line') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_dtl.shipment_date') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_upload_dtl.qty_shipped') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_upload_dtl.note') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @receipt_upload_dtls.each do |receipt_upload_dtl| %>
+          <tr id='row<%= receipt_upload_dtl.id %>'>
+            <td><%= receipt_upload_dtl.line_no %></td>
+            <td><%= receipt_upload_dtl.item_no %></td>
+            <td><%= receipt_upload_dtl.quantity %></td>
+            <td><%= receipt_upload_dtl.boxcount %></td>
+            <td><%= receipt_upload_dtl.vendor_id %></td>
+            <td><%= receipt_upload_dtl.po_no%></td>
+            <td><%= receipt_upload_dtl.shipment_no %></td>
+            <td><%= receipt_upload_dtl.shipment_line %></td>
+            <td><%= receipt_upload_dtl.shipment_date %></td>
+            <td><%= receipt_upload_dtl.qty_shipped %></td>
+            <td><%= receipt_upload_dtl.note %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-1"><%= home_link %></div>
+        <div class="col-md-2"><%= list_receipt_upload_hdrs_link(@runmode) %></div>
+      </div>
+    </div>
+  </div>
+</div>
+     

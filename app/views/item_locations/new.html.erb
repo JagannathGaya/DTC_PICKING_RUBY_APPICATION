@@ -1,0 +1,25 @@
+<section id='item_location'>
+  <div class="card card-default" style='max-width: 700px; margin: auto;'>
+    <div class="card card-heading"><%= t('item_location.scan_title') %></div>
+    <div class="card card-body">
+      <%= bootstrap_form_for [@item_location], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8" do |f| %>
+        <%= f.hidden_field :id, {:value => @item_location.id} %>
+        <%= f.alert_message t(:correct_errors) %>
+        <%= f.text_field :description, label: t('item_location.scanner_entry'), wrapper: {class: 'form-control-sm'}, autofocus: true %>
+        <%= f.text_field :stock_area, label: t('item_location.stock_area'), wrapper: {class: 'form-control-sm'}, class: 'uppercase' %>
+        <%= f.text_field :bin_loc, label: t('item_location.bin_loc'), wrapper: {class: 'form-control-sm'}, class: 'uppercase' %>
+        <div class="card card-footer">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="float-left">
+                  <%= f.submit t('item_location.find_bin'), html_options = {class: 'btn btn-primary btn-sm'} %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+

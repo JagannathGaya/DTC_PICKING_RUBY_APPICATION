@@ -1,0 +1,111 @@
+<section id='binpick_batch'>
+  <div class="card card-default" style='max-width: 700px; margin: auto;'>
+    <div class="card card-heading"><%= t('binpick_batch.pick_title') %></div>
+    <div class="card card-body">
+      <%= bootstrap_form_for [@binpick_batch], html: { multipart: true }, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+        <%= f.hidden_field :lock_version, { :value => @binpick_batch.lock_version } %>
+        <%= f.alert_message t(:correct_errors) %>
+        <%= f.text_field :client_id, label: t('binpick_batch.client_id'), wrapper: { class: 'form-control-sm' },
+                         value: @binpick_batch.client_name, readonly: true %>
+        <%= f.text_field :client_location_id, label: t('binpick_batch.client_location_id'), wrapper: { class: 'form-control-sm' },
+                         value: @current_client_location&.sls_location, readonly: true %>
+        <%= f.text_field :user_id, label: t('binpick_batch.user_id'), wrapper: { class: 'form-control-sm' },
+                         value: @binpick_batch.user_name, readonly: true %>
+        <%= f.number_field :start_order_seq, label: t('binpick_batch.start_order_seq'), min: 1, max: 99000,
+                         wrapper: { class: 'form-control-sm' } %>
+        <%= f.text_field :status, label: t('binpick_batch.status'), wrapper: { class: 'form-control-sm' },
+                         readonly: true, value: t("binpick_batch.status_list.#{@binpick_batch.status}") %>
+        <%= f.select :bo_option, options_for_select(BinpickBatch.bo_option_list(@current_client), @binpick_batch.bo_option),
+                     label: t('binpick_batch.bo_option'), wrapper: { class: 'form-control-sm' } %>
+        <div class="card card-default" style='max-width: 700px; margin: auto;'>
+          <div class='card-heading'>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <%= t('binpick_batch_summary.new_title') %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id='binpick_batch_summary_table'
+                     class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm mx-auto w-auto'>
+                <tbody>
+                <% @binpick_batch_summaries.each do |binpick_batch_summary| %>
+                  <tr class="<%= batch_summary_row_color(binpick_batch_summary) %>">
+                    <td class="align-middle"><%= binpick_batch_summary.stat_type %></td>
+                    <td class="align-middle"><%= formatted_qty(binpick_batch_summary.stat_value) %></td>
+                    <td class="align-middle"><%= binpick_stat_message(binpick_batch_summary) %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card card-footer">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="float-left">
+                <% if @binpick_batch.status == 'I' %>
+                  <%= f.submit t('binpick_batch.open_batch'), html_options = { class: 'btn btn-primary btn-sm' } %>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="float-right">
+                <%= cancel_link %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card card-default" style='max-width: 850px; margin: auto;'>
+    <div class="card card-heading">
+      <div class="row">
+        <div class="col-md-6"><%= t('binpick_batch.list') %></div>
+        <div class="col-md-6">
+          <div class="float-right">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-body">
+      <div>
+        <table width='100%' id='binpick_batch_list'
+               class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+          <thead>
+          <tr>
+            <!--            <th class='table-sortable:numeric'><%#= t('binpick_batch.id') %></th>-->
+            <th class='table-sortable:alphanumeric'><%= t('binpick_batch.user_id') %></th>
+            <th class='table-sortable:alphanumeric'><%= t('binpick_batch.client_id') %></th>
+            <th class='table-sortable:alphanumeric'><%= t('binpick_batch.status') %></th>
+            <!--            <th class='table-sortable:alphanumeric'><%#= t('binpick_batch.created_at') %></th>-->
+            <!--            <th class='table-sortable:alphanumeric'><%#= t('binpick_batch.updated_at') %></th>-->
+            <th class='table-sortable:numeric'><%= t('binpick_batch.start_seq') %></th>
+            <th class='table-sortable:numeric'><%= t('binpick_batch.end_seq') %></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @other_binpick_batches.each do |binpick_batch| %>
+            <tr id='row<%= binpick_batch.id %>'>
+              <!--              <td><%#= binpick_batch.id %></td>-->
+              <td><%= binpick_batch.user_name %></td>
+              <td><%= binpick_batch.client_name %></td>
+              <td><%= t("binpick_batch.status_list.#{binpick_batch.status}") %></td>
+              <!--              <td><%#= formatted_date(binpick_batch.created_at) %></td>-->
+              <!--              <td><%#= formatted_date(binpick_batch.updated_at) %></td>-->
+              <td><%= formatted_qty(binpick_batch.start_order_seq) %></td>
+              <td><%= formatted_qty(binpick_batch.end_order_seq) %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

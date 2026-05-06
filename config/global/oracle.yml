@@ -1,0 +1,14 @@
+development:
+  oracledb: tbp_dev
+lonnie_dev:
+  oracledb: tbp_lonnie_dev
+lonnie_prod:
+  oracledb: tbp_lonnie_prod
+lonnie_branch:
+  oracledb: tbp_lonnie_dev
+test:
+  oracledb: false
+demo:
+  oracledb: tbp_demo
+production:
+  oracledb: tbp_production

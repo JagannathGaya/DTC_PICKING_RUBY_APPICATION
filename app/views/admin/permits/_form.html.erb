@@ -1,0 +1,29 @@
+<section id='permit'>
+  <div class="card card-default">
+    <div class="card card-heading"><%= "#{@permit.report_name ? t('permit.edit') + ': ' + @permit.report_name : t('permit.new')}" %></div>
+    <div class="card card-body">
+      <%#= render :partial => 'layouts/notices' %>
+      <%= bootstrap_form_for [:admin, @permit], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+        <%= f.hidden_field :lock_version, {:value => @permit.lock_version} %>
+        <%= f.alert_message t(:correct_errors) %>
+          <%= f.select :report_name,
+                       options_for_select(PermitTarget.reports, @permit.report_name),
+                       include_blank: t(:select), label: t('permit.report_name'), wrapper: {class: 'form-control-sm'} %>
+          <%= f.select :client_id,
+                       Client.all.ordered.map {|s| ["#{s.cust_no}:#{s.cust_name}", s.id]},
+                       selected: @permit.client_id,
+                       include_blank: t(:select), label: t('permit.client_id'), wrapper: {class: 'form-control-sm'} %>
+          <%= f.select :user_id,
+                       User.permit_users.ordered.map {|s| ["#{s.email} (#{s.name})", s.id]},
+                       selected: @permit.user_id,
+                       include_blank: t(:select), label: t('permit.user_id'), wrapper: {class: 'form-control-sm'} %>
+        <div class='form-control-sm'>
+          <%= f.form_group do %>
+            <%= f.check_box :allow, label: t('permit.allow'), wrapper: { class: 'form-control-sm' } %>
+          <% end %>
+        </div>
+        <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+    </div>
+  </div>
+</section>

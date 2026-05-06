@@ -1,0 +1,1 @@
+Global.backend :filesystem, directory: 'config/global', environment: Rails.env

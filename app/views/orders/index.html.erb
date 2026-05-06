@@ -1,0 +1,48 @@
+<div class="card card-default" style='max-width: 1000px; margin: auto;'>
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-6"><%= t('order.title') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= back_link %>
+          <%= view_order_lines_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='paginator'><%= paginate @orders %></div>
+    <div>
+      <table id='orders_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('order.order_no') %></th>
+          <th></th>
+          <th class='table-sortable:alphanumeric'><%= t('order.ship_name') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('order.shipto_country_cd') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('order.estship_dt') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.order_number %></td>
+            <td><%= check_box_tag("#{order.order_no.to_s}", 'off', (session[:orderlist] || String.new).include?(order.order_no.to_s), class: 'order-picker') %></td>
+            <td><%= order.ship_name %></td>
+            <td><%= order.shipto_country_cd %></td>
+            <td><%= formatted_date(order.estship_dt) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="float-left">
+      <%= home_link %>
+      <%= back_link %>
+    </div>
+  </div>
+</div>
+
+
+

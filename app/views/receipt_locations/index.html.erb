@@ -1,0 +1,63 @@
+<div class="card card-default">
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-6"><%= t('receipt_location.title', {batch: batch_title(@receipt_batch)}) %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= list_receipt_batches_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body">
+    <div>
+      <div id='paginator'><%= paginate @receipt_locations %></div>
+      <table width='100%' id='receipt_location_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.item_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.description') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_item.boxcount') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_item.quantity') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.note') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.comment') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.searched') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.status_flag') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_item.discontinue_flag') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_location.stock_area') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_location.bin_loc') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_location.quantity') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_location.new_default') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @receipt_locations.each do |receipt_location| %>
+          <tr id='row<%= receipt_location.id %>'>
+            <td><%= receipt_location.receipt_item.item_no if receipt_location.receipt_item %></td>
+            <td><%= receipt_location.receipt_item.description if receipt_location.receipt_item %></td>
+            <td><%= receipt_location.receipt_item.boxcount if receipt_location.receipt_item %></td>
+            <td><%= receipt_location.receipt_item.quantity if receipt_location.receipt_item %></td>
+            <td><%= receipt_location.receipt_item.note if receipt_location.receipt_item %></td>
+            <td><%= receipt_location.receipt_item.comment if receipt_location.receipt_item %></td>
+            <td><%= receipt_location.receipt_item.searched if receipt_location.receipt_item %></td>
+            <td><%= receipt_location.receipt_item.status_flag if receipt_location.receipt_item %></td>
+            <td><%= receipt_location.receipt_item.discontinue_flag if receipt_location.receipt_item %></td>
+            <td><%= receipt_location.stock_area %></td>
+            <td><%= receipt_location.bin_loc %></td>
+            <td><%= receipt_location.quantity %></td>
+            <td><%= receipt_location.new_default %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="float-left">
+          <%= home_link %>
+          <%= list_receipt_batches_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+     

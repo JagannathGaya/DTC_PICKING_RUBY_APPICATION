@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-sm-4"><%= t('whouse_item.item_no') %></div>
+  <div class="col-sm-8"><%= @whouse_item.item_no %></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"><%= t('whouse_item.description') %></div>
+  <div class="col-sm-8"><%= @whouse_item.description %></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"><%= t('whouse_item.status_flag') %></div>
+  <div class="col-sm-8"><%= (@whouse_item.status_flag == 'Active') ? '' : 'redlight' %>"><%= @whouse_item.status_flag %></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"><%= t('whouse_item.discontinue_flag') %></div>
+  <div class="col-sm-8"><%= (@whouse_item.discontinue_flag == 'No') ? '' : 'redlight' %>"><%= @whouse_item.discontinue_flag %></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"><%= t('whouse_item.wo_info') %></div>
+  <div class="col-sm-8"><%= @whouse_item.wo_info %></div>
+</div>
+
+

@@ -1,0 +1,37 @@
+<section id='edit_account'>
+  <div class="card card-default" style='max-width: 750px; margin: auto;'>
+    <div class="card-heading">
+      <div class="row">
+        <div class="col-md-10"><%= "#{t(:edit)} #{resource_name.to_s.humanize}" %></div>
+        <div class="col-md-2"><%= home_link %></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <%= bootstrap_form_for resource, as: resource_name, url: registration_path(resource_name), method: :put, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div class='form-control-sm'>
+            <p class='form-control-plaintext'><%= "#{t('user.waiting')} #{resource.unconfirmed_email}}" %></p>
+          </div>
+        <% end %>
+        <%= f.email_field :email, autocomplete: 'off', label: t('user.email'), wrapper: {class: 'form-control-sm'}, autofocus: true %>
+        <%= f.text_field :name, label: t('user.name'), wrapper: {class: 'form-control-sm'} %>
+        <% unless current_user.user? %>
+          <%= f.text_field :empno, readonly: true, label: t('user.empno'), wrapper: {class: 'form-control-sm'} %>
+        <% end %>
+        <%= f.select :locale, User::LOCALES, selected: @user.locale,
+                     include_blank: t(:select), label: t('user.locale'), wrapper: {class: 'form-control-sm'} %>
+        <%= f.password_field :password, label: t('user.password'), wrapper: {class: 'form-control-sm'} %>
+        <div class='form-control-sm'>
+          <p class='form-control-plaintext'><%= t('user.leave_blank') %></p>
+        </div>
+        <%= f.password_field :password_confirmation, label: t('user.password_confirmation'), wrapper: {class: 'form-control-sm'} %>
+        <%= f.password_field :current_password, label: t('user.current_password'), wrapper: {class: 'form-control-sm'} %>
+        <div class='form-control-sm'>
+          <p class='form-control-plaintext'><%= t('user.need_current') %></p>
+        </div>
+        <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<section id='backorder_shortage'>
+  <div class="card card-default">
+    <div class="card card-heading"><%= t('binpick_bin_item.backorder_all_orders') %></div>
+    <div class="card card-body">
+      <%= bootstrap_form_for [@binpick_bin_item], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-6", control_col: "col-sm-6" do |f| %>
+        <%= f.hidden_field :status, value: @binpick_bin_item.status %>
+        <% puts "_form exceptions_present = #{@binpick_bin_item.all_orders_exceptions_present.inspect}" %>
+        <% if @binpick_bin_item.all_orders_exceptions_present == 'true' %>
+          <h4>All remaining order lines for this item will be backordered.  Press Save to continue, Cancel to exit.</h4>
+        <% else %>
+          <%= f.text_field :first_short_order_seq, value: @binpick_bin_item.first_short_order_seq.to_i,
+                         label: t('binpick_bin_item.first_short_order_seq'),   autocomplete: 'off',
+                         wrapper: {class: 'form-control-sm'}, class: 'uppercase' %>
+        <% end %>
+        <br/>
+        <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm'} %>
+        <%= cancel_link %>
+      <% end %>
+      <br/> <br/>
+    </div>
+  </div>
+</section>

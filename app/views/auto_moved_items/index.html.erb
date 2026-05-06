@@ -1,0 +1,76 @@
+<div class="card card-default" style='margin: auto;'>
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-6"><%= t('auto_moved_item.title') %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= home_link %>
+          <%= back_link %>
+          <%= clear_filters_link(auto_moved_items_path) %>
+          <%= export_link('auto_moved_items', 'csv') %>
+          <%= export_link('auto_moved_items', 'xlsx') %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-center" id='paginator'><%= paginate @auto_moved_items %></div>
+  </div>
+    <div class="d-flex justify-content-center"><%= auto_moved_item_processed_filter %><%= ("&nbsp;" * 20).to_s.html_safe %><%= generate_auto_moves_button %></div>
+  <div class="table-responsive">
+    <table id='binpick_replenishments_table' class='example table-autosort table-autofilter table table-striped table-bbinpick_replenishmented table-hover table-sm mx-auto w-auto'>
+      <thead>
+      <tr>
+        <th class='table-sortable:numeric'><%= t('auto_moved_item.item_no') %></th>
+        <th class='table-sortable:numeric'><%= t('auto_moved_item.qty_moved') %></th>
+        <th class='table-sortable:alphanumeric'><%= t('auto_moved_item.from_stock_area') %></th>
+        <th class='table-sortable:alphanumeric'><%= t('auto_moved_item.from_bin_loc') %></th>
+        <th class='table-sortable:alphanumeric'><%= t('auto_moved_item.to_stock_area') %></th>
+        <th class='table-sortable:alphanumeric'><%= t('auto_moved_item.to_bin_loc') %></th>
+        <% if session[:filter]['auto_moved_item_processed_filter'] == 'true' %>
+          <th class='table-sortable:alphanumeric'><%= t('auto_moved_item.processed_flag') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('auto_moved_item.processed_date') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('auto_moved_item.empno') %></th>
+        <% else %>
+          <th></th>
+        <% end %>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>
+          <input id='auto_moved_item_from_stock_area_filter' autofocus='autofocus' value=<%= raw("\"#{session[:filter]['auto_moved_item_from_stock_area_filter']}\"") %>/>
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <% if session[:filter]['auto_moved_item_processed_filter'] == 'true' %>
+          <th></th>
+          <th></th>
+        <% end %>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @auto_moved_items.each do |moved_item| %>
+        <tr id='<%= moved_item.id.to_s %>'>
+          <td><%= moved_item.item_no %></td>
+          <td class="align-right"><%= formatted_qty(moved_item.qty_moved) %></td>
+          <td><%= moved_item.from_stock_area %></td>
+          <td><%= moved_item.from_bin_loc %></td>
+          <td><%= moved_item.to_stock_area %></td>
+          <td><%= moved_item.to_bin_loc %></td>
+          <% if session[:filter]['auto_moved_item_processed_filter'] == 'true' %>
+            <td><%= moved_item.processed_flag %></td>
+            <td><%= moved_item.processed_date %></td>
+            <td><%= moved_item.empno %></td>
+          <% else %>
+            <td><%= confirm_auto_moved_item(moved_item) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

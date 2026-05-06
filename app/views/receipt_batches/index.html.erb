@@ -1,0 +1,82 @@
+<div class="card card-default">
+  <div class="card card-heading">
+    <div class="row">
+      <div class="col-md-4"><%= t('receipt_batch.title') %></div>
+      <div class="col-md-8">
+        <div class="float-right">
+          <%= clear_filters_link(receipt_batches_path) %>
+          <%= home_link %>
+          <%= back_link %>
+          <%= new_receipt_batch_link %>
+          <%= new_batch_from_upload_link %>
+        </div>
+      </div>
+    </div>
+    <% if @receiving_note %>
+      <div class="row">
+        <div class="col-md-11 col-md-offset-1"><%= @receiving_note %></div>
+      </div>
+    <% end %>
+  </div>
+  <div class="card card-body">
+    <div>
+      <div id='paginator'><%= paginate @receipt_batches %></div>
+      <table width='100%' id='receipt_batch_table' class='example table-autosort table-autofilter table table-striped table-bordered table-hover table-sm table-responsive'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_batch.batch_status') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_batch.po_ref') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_batch.note') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_batch.tracking_ref') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_batch.dock_receipt_at') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_batch.vendor_no') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('receipt_batch.empno_inits') %></th>
+          <th class='table-sortable:numeric'><%= t('receipt_batch.receipt_upload_hdr_id') %></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th><%= receipt_batch_status_filter %></th>
+          <th>
+            <input id='receipt_batch_po_ref_filter' value=<%= raw("\"#{session[:filter]['receipt_batch_po_ref_filter']}\" class='uppercase' style='width: 90%;' ") %>/>
+          </th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><%= receipt_batch_vendor_filter %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @receipt_batches.each do |receipt_batch| %>
+          <tr id='row<%= receipt_batch.id %>'>
+            <td><%= receipt_batch.batch_status %></td>
+            <td><%= receipt_batch.po_ref %></td>
+            <td><%= receipt_batch.note %></td>
+            <td><%= receipt_batch.tracking_ref %></td>
+            <td><%= formatted_time(receipt_batch.dock_receipt_at, '%F %R') %></td>
+            <td><%= receipt_batch.vendor_no %></td>
+            <td><%= receipt_batch.empno_inits(@current_client.cust_no) %></td>
+            <td><%= receipt_batch.receipt_upload_hdr_id %></td>
+            <td><%= list_receipt_batch_lines_link(receipt_batch) %>
+              <%= edit_receipt_batch_link(receipt_batch) %>
+              <%= delete_receipt_batch_link(receipt_batch) %>
+              <%= close_receipt_batch_link(receipt_batch) %>
+              <%= putaway_link(receipt_batch) %>
+              <%= list_detail_link(receipt_batch) %>
+              <%= receipt_batch_download_861_link(receipt_batch) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="float-left">
+          <%= home_link %>
+          <%= back_link %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+     

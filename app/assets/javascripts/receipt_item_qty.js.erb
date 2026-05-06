@@ -1,0 +1,11 @@
+$(document).ready(function(){
+    fetch_receipt_item_qty_change();
+});
+function fetch_receipt_item_qty_change() {
+    $('#receipt_location_receipt_item_id').on('change', function (e) { fetch_receipt_item_qty_execute(); });
+}
+function fetch_receipt_item_qty_execute() {
+    $('#receipt_location_quantity').val( $('#row'+$('#receipt_location_receipt_item_id').val()+' td:nth-child(5)').html() );
+ }
+
+

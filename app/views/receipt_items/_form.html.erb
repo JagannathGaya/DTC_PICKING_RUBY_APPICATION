@@ -1,0 +1,82 @@
+<script>
+
+  var last_comment;
+
+  $(document).ready(function () {
+    console.log("document.ready firing");
+    bind_item_no();
+  });
+
+  function bind_item_no() {
+    console.log("binding item number");
+    $('#receipt_item_item_no').bind('focusout', function (e) {
+      execute_item_change();
+    });
+  }
+
+  function item_comment_alert(data) {
+    if (data['comment_text'] && data['comment_text'] !=  last_comment ) {
+      alert(data['comment_text']);
+      last_comment = data['comment_text'];
+    }
+  }
+
+  function execute_item_change() {
+    var param_item = $('#receipt_item_item_no').val();
+    jQuery.ajax({
+      url: "/item_comments",
+      type: "GET",
+      data: {
+        "item_no": param_item
+      },
+      dataType: "json",
+      success: function (data) {
+        item_comment_alert(data);
+      }
+    });
+  }
+
+</script>
+
+
+<section id='receipt_item'>
+  <div class="card card-default">
+    <div class="card card-body">
+      <div class="row">
+        <%= bootstrap_form_for [@receipt_batch, @receipt_item], html: {multipart: true}, layout: :inline, wrapper_class: "form-control form-control-sm" do |f| %>
+          <%= f.hidden_field :lock_version, {:value => @receipt_item.lock_version} %>
+          <%= f.hidden_field :receipt_batch_id, {:value => @receipt_item.receipt_batch_id} %>
+          <%= f.hidden_field :empno, {:value => @receipt_item.empno} %>
+          <%= f.hidden_field :searched, {:value => @receipt_item.searched} %>
+          <%= f.hidden_field :note, {:value => @receipt_item.note} %>
+          <%= f.hidden_field :label_copies, {:value => @receipt_item.label_copies} %>
+          <%= f.error_messages %>
+          <%= "#{t('receipt_item.new_line_title', {batch: @receipt_batch.id})}" %>
+          <br/>
+          <%= "#{mode == 'edit' ? t('receipt_item.edit') + ': ' + @receipt_item.item_no : t('receipt_item.new')}" %>
+          <%= f.submit t('receipt_item.find_item'), name: "find_item", class: 'btn btn-primary btn-sm', style: 'margin-top: 6px; margin-left: 20px;' %>
+          <%= f.text_field :item_no, label: t('receipt_batch.item_no'), autocomplete: 'off', wrapper: { class: 'form-control-sm' }, class: 'uppercase', autofocus: "autofocus" %>
+          <% if mode == 'new' %>
+            <%= f.number_field :boxcount, label: t('receipt_item.boxcount'), wrapper: { class: 'form-control-sm' }, style: "width:80px;", value: "" %>
+            <%= f.number_field :quantity, label: t('receipt_item.quantity'), wrapper: { class: 'form-control-sm' }, style: "width:80px;", value: "" %>
+          <% else %>
+            <%= f.number_field :quantity, label: t('receipt_item.quantity'), wrapper: { class: 'form-control-sm' }, style: "width:80px;" %>
+            <%= f.number_field :boxcount, label: t('receipt_item.boxcount'), wrapper: { class: 'form-control-sm' }, style: "width:80px;" %>
+          <% end %>
+          <br/><br/>
+          <%= f.text_area :comment, cols: '25', rows: '1', label: t('receipt_item.comment'), autocomplete: 'off', wrapper: { class: 'form-control-sm' } %>
+          <br/>
+          <%= f.submit t(:save), name: 'save', class: 'btn btn-primary btn-sm', style: 'margin-top: 12px;' %>
+        <% end %>
+      </div>
+      <% @item_comments.each do |item_comment| %>
+        <div class="row">
+          <%= item_comment.comment_text %>
+        </div>
+      <% end unless @item_comments.nil? %>
+      <div id="alert_comment"></div>
+    </div>
+  </div>
+</section>
+
+<%= render "index" %>

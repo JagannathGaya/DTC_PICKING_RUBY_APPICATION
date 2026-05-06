@@ -1,0 +1,62 @@
+<div class="card card-default" style='max-width: 1000px; margin: auto;'>
+  <div class='card-heading'>
+    <div class="row">
+      <div class="col-md-6"><%= t('whouse_inv.title_trans', item_no: @whouse_item.item_no) %></div>
+      <div class="col-md-6">
+        <div class="float-right">
+          <%= search_loc_type_filter %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id='paginator'><%= paginate @item_hists %></div>
+    <div class="table-responsive">
+      <table id='item_hists_table' class='example table-autosort table-autofilter table table-striped table-b item_histed table-hover table-sm  mx-auto w-auto'>
+        <thead>
+        <tr>
+          <th class='table-sortable:alphanumeric'><%= t('item_hist.trans_type_desc') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('item_hist.area_bin') %></th>
+          <th class='table-sortable:numeric'><%= t('item_hist.trans_qty') %></th>
+          <th class='table-sortable:date'><%= t('item_hist.trans_date') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('item_hist.reason_code') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('item_hist.empno') %></th>
+          <th class='table-sortable:alphanumeric'><%= t('item_hist.ref_remark') %></th>
+        </tr>
+        <tr>
+          <th><%= search_trans_type_filter %></th>
+          <th><%= search_area_bin_filter %></th>
+          <th>
+            <%= search_qty_mod_filter %>
+            <input id='search_quantity_filter' value=<%= raw("\"#{session[:filter]['search_quantity_filter']}\" type='number' min='0' style='width: 90%;' ") %>/>
+          </th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @item_hists.each do |item_hist| %>
+          <tr>
+            <td class="align-middle"><%= item_hist.trans_type_desc %></td>
+            <td class="align-middle"><%= search_get_items(item_hist.area_bin) %></td>
+            <td class="align-middle"><%= formatted_qty(item_hist.trans_qty) %></td>
+            <td class="align-middle"><%= formatted_date(item_hist.trans_date, :edit) %></td>
+            <td class="align-middle"><%= item_hist.reason_code %></td>
+            <td class="align-middle" ontouchstart='alert("<%= item_hist.emp_name %>");' onclick='alert("<%= item_hist.emp_name %>");' ><%= item_hist.empno %></td>
+            <td class="align-middle"><%= item_hist.ref_remark %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

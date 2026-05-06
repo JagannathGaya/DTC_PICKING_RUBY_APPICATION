@@ -1,0 +1,32 @@
+<section id='receipt_batch'>
+  <div class="card card-default">
+    <div class="card card-heading"><%= "#{@receipt_batch.id ? t('receipt_batch.edit') + ': ' + @receipt_batch.id.to_s : t('receipt_batch.new')}" %></div>
+    <div class="card card-body">
+      <%= bootstrap_form_for [@receipt_batch], html: {multipart: true}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
+        <%= f.hidden_field :lock_version, {:value => @receipt_batch.lock_version} %>
+        <%= f.hidden_field :client_id, {:value => @receipt_batch.client_id} %>
+        <%= f.error_messages %>
+        <% if @receipt_batch.id %>
+          <%= f.select :batch_status, ReceiptBatch::BATCH_STATUSES,
+                       selected: @receipt_batch.batch_status,
+                       prompt: t('select'), label: t('receipt_batch.batch_status'), wrapper: {class: 'form-control-sm'} %>
+        <% else %>
+          <%= f.text_field :batch_status, label: t('receipt_batch.batch_status'), value: "#{@receipt_batch.batch_status}", readonly: true, wrapper: {class: 'form-control-sm'} %>
+        <% end %>
+        <%= f.select :vendor_no,
+                     @tbdash_vendors.map {|s| ["#{s.vendor_name} (#{s.vendor_no})", s.vendor_no]},
+                     selected: @receipt_batch.vendor_no,
+                     prompt: t(:select), label: t('receipt_batch.vendor_no'), wrapper: {class: 'form-control-sm'} %>
+        <%= f.text_field :po_ref, label: t('receipt_batch.po_ref'), autocomplete: 'off', wrapper: {class: 'form-control-sm'}, class: 'uppercase' %>
+        <%= f.text_field :tracking_ref, label: t('receipt_batch.tracking_ref'), autocomplete: 'off', wrapper: {class: 'form-control-sm'}, class: 'uppercase' %>
+        <%= f.datetime_select :dock_receipt_at, label: t('receipt_batch.dock_receipt_at'), autocomplete: 'off', ampm: true, wrapper: {class: 'form-control-sm'} %>
+        <br/>
+        <%= f.text_area :note, cols: '50', rows: '6', required: true, label: t('receipt_batch.note'), wrapper: {class: 'form-control-sm'} %>
+        <br/><br/><br/><br/><br/>
+
+        <%= f.submit t(:save), html_options = {class: 'btn btn-primary btn-sm'} %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
