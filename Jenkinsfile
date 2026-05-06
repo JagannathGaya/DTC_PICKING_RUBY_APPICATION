@@ -8,16 +8,19 @@ pipeline {
 
     stages {
 
-        stage('Deploy Code') {
+        stage('Deploy Code (rsync)') {
             steps {
                 sh '''
-                echo "🚀 Copying code..."
+                echo "🚀 Deploying using rsync..."
 
-                 echo "🚀  $WORKSPACE "
+                mkdir -p $APP_DIR
 
-                // mkdir -p $APP_DIR
-                rm -rf $APP_DIR/*
-                sudo cp -r $WORKSPACE/* $APP_DIR/
+                rsync -av --delete \
+                  --exclude='.git' \
+                  --exclude='log' \
+                  --exclude='tmp' \
+                  --exclude='node_modules' \
+                  $WORKSPACE/ $APP_DIR/
                 '''
             }
         }
