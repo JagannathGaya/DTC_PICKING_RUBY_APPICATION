@@ -16,6 +16,13 @@ x-app: &app
     # gems are installed at build time and live in the image. A named volume
     # there would shadow them and break git-source gems like ar-octopus.
     - .:/app
+    # Hide any host-side Bundler state from the container. If the host ran
+    # `bundle install` outside Docker (e.g. via the Jenkinsfile), it may have
+    # created `.bundle/config` pointing at `vendor/bundle` — which would make
+    # the container's Bundler look in the wrong place and miss gems installed
+    # to /usr/local/bundle during image build.
+    - /app/.bundle
+    - /app/vendor/bundle
   extra_hosts:
     - "host.docker.internal:host-gateway"
   environment:
@@ -27,6 +34,14 @@ x-app: &app
     DATABASE_PASSWORD: ${DATABASE_PASSWORD:-Pgsql@2026}
 
 services:
+  # One-shot: create the DB if missing, then run any pending migrations.
+  # `db:prepare` (Rails 6+) is idempotent — it creates+loads schema on first
+  # run, and only runs pending migrations on subsequent runs. Exits when done.
+  db-setup:
+    <<: *app
+    command: bash -c "bundle exec rails db:prepare"
+    restart: "no"
+
   # Rails web app (Puma).
   web:
     <<: *app
@@ -35,8 +50,14 @@ services:
       - "3000:3000"
     stdin_open: true
     tty: true
+    depends_on:
+      db-setup:
+        condition: service_completed_successfully
 
   # delayed_job background worker — same image, different command.
   # worker:
   #   <<: *app
   #   command: bash -c "(bundle check || bundle install) && bundle exec rake jobs:work"
+  #   depends_on:
+  #     db-setup:
+  #       condition: service_completed_successfully
