@@ -1,0 +1,44 @@
+version: "3.8"
+
+# This compose file does NOT run PostgreSQL. The Rails containers connect to
+# an EXISTING Postgres server. Configure where via environment variables (see
+# defaults below). You can override them by:
+#   1. exporting them in your shell before `docker compose up`, or
+#   2. putting them in a `.env` file next to this docker-compose.yml
+#
+# `host.docker.internal` is a special hostname that resolves to the host
+# machine running Docker. The `extra_hosts: host-gateway` line below makes
+# it work on Linux too (it works out of the box on Docker Desktop).
+
+x-app: &app
+  build: .
+  volumes:
+    - .:/app
+    - bundle_cache:/usr/local/bundle
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  environment:
+    RAILS_ENV: development
+    DATABASE_HOST: ${DATABASE_HOST:-host.docker.internal}
+    DATABASE_PORT: ${DATABASE_PORT:-5432}
+    DATABASE_NAME: ${DATABASE_NAME:-tbcorp_development}
+    DATABASE_USERNAME: ${DATABASE_USERNAME:-postgres}
+    DATABASE_PASSWORD: ${DATABASE_PASSWORD:-root}
+
+services:
+  # Rails web app (Puma).
+  web:
+    <<: *app
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3000"
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+
+  # delayed_job background worker — same image, different command.
+  worker:
+    <<: *app
+    command: bundle exec rake jobs:work
+
+volumes:
+  bundle_cache:

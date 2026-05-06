@@ -8,8 +8,13 @@ gem 'sprockets' , '3.7.2'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # oracle adapter
-gem 'ruby-oci8'
-gem 'activerecord-oracle_enhanced-adapter', '~> 6.0'
+# Wrapped in a `:oracle` group so environments without Oracle Instant Client
+# (e.g. Docker images for Postgres-only deployments) can skip it via
+# `bundle install --without oracle` (or BUNDLE_WITHOUT=oracle env var).
+group :oracle do
+  gem 'ruby-oci8'
+  gem 'activerecord-oracle_enhanced-adapter', '~> 6.0'
+end
 gem 'ar-octopus', '~> 0.10.2' , :git => 'https://github.com/schovi/octopus'
 gem 'activerecord-import'
 
