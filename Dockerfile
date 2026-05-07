@@ -53,8 +53,8 @@ COPY vendor/oracle/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip /tmp/
 COPY vendor/oracle/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip   /tmp/
 RUN mkdir -p /opt/oracle \
  && cd /opt/oracle \
- && unzip -q /tmp/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
- && unzip -q /tmp/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
+ && unzip -q -o /tmp/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
+ && unzip -q -o /tmp/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
  && rm -f /tmp/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
           /tmp/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
  && ln -sf /opt/oracle/instantclient_19_23/libclntsh.so.19.1 /opt/oracle/instantclient_19_23/libclntsh.so \
