@@ -2,11 +2,13 @@ pipeline {
     agent any
 
     environment {
-        APP_DIR =  "/var/www/TBCORP"
-        RAILS_ENV = "development"   // change to production later
+        APP_DIR = "/var/www/TBCORP"
+        RAILS_ENV = "development"
     }
 
-    stage('Deploy Code (rsync)') {
+    stages {
+
+        stage('Deploy Code (rsync)') {
             steps {
                 sh '''
                 echo "🚀 Deploying using rsync..."
@@ -23,30 +25,42 @@ pipeline {
             }
         }
 
-    // stages {
+        // stage('Bundle Install') {
+        //     steps {
+        //         sh '''
+        //         cd $APP_DIR
 
-    //     stage('Start Server') {
-    //         steps {
-    //             sh '''
-    //             cd $APP_DIR
+        //         echo "📦 Installing gems..."
 
-    //             echo "▶️ Starting Rails server..."
+        //         bundle install
+        //         '''
+        //     }
+        // }
 
-    //             # Kill existing rails server
-    //             pkill -f "rails server" || true
+        stage('Start Rails Server') {
+            steps {
+                sh '''
+                cd $APP_DIR
 
-    //             # Start Rails server in background
-    //             RAILS_ENV=development setsid bundle exec rails server -b 0.0.0.0 -p 3000 > app.log 2>&1 < /dev/null &
-    //             '''
-    //         }
-    //     }
+                echo "🛑 Stopping existing Rails server..."
+                pkill -f "rails server" || true
 
-    // }
+                echo "🚀 Starting Rails server..."
+
+                BUILD_ID=dontKillMe setsid bundle exec rails server \
+                  -b 0.0.0.0 \
+                  -p 3000 \
+                  > app.log 2>&1 < /dev/null &
+                '''
+            }
+        }
+    }
 
     post {
         success {
             echo '✅ App deployed and running!'
         }
+
         failure {
             echo '❌ Deployment failed!'
         }
