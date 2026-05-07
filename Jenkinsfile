@@ -19,7 +19,7 @@ pipeline {
                 pkill -f "rails server" || true
 
                 # Start Rails server in background
-                nohup bundle exec rails server -b 0.0.0.0 -p 3000 > app.log 2>&1 &
+                RAILS_ENV=development setsid bundle exec rails server -b 0.0.0.0 -p 3000 > app.log 2>&1 < /dev/null &
                 '''
             }
         }
