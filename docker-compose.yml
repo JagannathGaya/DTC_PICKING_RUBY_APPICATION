@@ -1,68 +1,85 @@
-# This compose file does NOT run PostgreSQL. The Rails containers connect to
-# an EXISTING Postgres server. Configure where via environment variables (see
-# defaults below). You can override them by:
-#   1. exporting them in your shell before `docker compose up`, or
-#   2. putting them in a `.env` file next to this docker-compose.yml
-#
-# `host.docker.internal` is a special hostname that resolves to the host
-# machine running Docker. The `extra_hosts: host-gateway` line below makes
-# it work on Linux too (it works out of the box on Docker Desktop).
+version: "3.9"
+
+# ---------------------------------------------------
+# Shared Rails app configuration
+# ---------------------------------------------------
 
 x-app: &app
   build: .
+  working_dir: /app
+
   volumes:
-    # Mount source so edits on the host reflect in the container without rebuild.
-    # Note: we deliberately do NOT mount a volume over /usr/local/bundle —
-    # gems are installed at build time and live in the image. A named volume
-    # there would shadow them and break git-source gems like ar-octopus.
+    # Mount application source
     - .:/app
-    # Hide any host-side Bundler state from the container. If the host ran
-    # `bundle install` outside Docker (e.g. via the Jenkinsfile), it may have
-    # created `.bundle/config` pointing at `vendor/bundle` — which would make
-    # the container's Bundler look in the wrong place and miss gems installed
-    # to /usr/local/bundle during image build.
-    - /app/.bundle
-    - /app/vendor/bundle
+
   extra_hosts:
     - "host.docker.internal:host-gateway"
+
   environment:
     RAILS_ENV: development
+
     DATABASE_HOST: ${DATABASE_HOST:-192.168.66.49}
     DATABASE_PORT: ${DATABASE_PORT:-5432}
     DATABASE_NAME: ${DATABASE_NAME:-tbcorp_development}
     DATABASE_USERNAME: ${DATABASE_USERNAME:-postgres}
     DATABASE_PASSWORD: ${DATABASE_PASSWORD:-Pgsql@2026}
 
+  stdin_open: true
+  tty: true
+
+# ---------------------------------------------------
+# Services
+# ---------------------------------------------------
+
 services:
-  # One-shot: create the DB if missing, then run any pending migrations.
-  # `db:prepare` (Rails 6+) is idempotent — it creates+loads schema on first
-  # run, and only runs pending migrations on subsequent runs. Exits when done.
+
+  # -----------------------------------------------
+  # Database setup (runs once)
+  # -----------------------------------------------
   db-setup:
     <<: *app
+    container_name: tbcorp-db-setup
+
     command: >
       bash -c "
-        bundle exec rails db:create &&
-        bundle exec rails db:migrate &&
+        bundle exec rails db:prepare &&
         bundle exec rails db:seed
       "
+
     restart: "no"
 
-  # Rails web app (Puma).
+  # -----------------------------------------------
+  # Rails web application
+  # -----------------------------------------------
   web:
     <<: *app
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3000"
+    container_name: tbcorp-web
+
+    command: >
+      bash -c "
+        rm -f tmp/pids/server.pid &&
+        bundle exec rails server -b 0.0.0.0 -p 3000
+      "
+
     ports:
       - "3000:3000"
-    stdin_open: true
-    tty: true
+
     depends_on:
       db-setup:
         condition: service_completed_successfully
 
-  # delayed_job background worker — same image, different command.
-  # worker:
-  #   <<: *app
-  #   command: bash -c "(bundle check || bundle install) && bundle exec rake jobs:work"
-  #   depends_on:
-  #     db-setup:
-  #       condition: service_completed_successfully
+  # -----------------------------------------------
+  # Delayed Job worker (optional)
+  # -----------------------------------------------
+  worker:
+    <<: *app
+    container_name: tbcorp-worker
+
+    command: >
+      bash -c "
+        bundle exec rake jobs:work
+      "
+
+    depends_on:
+      db-setup:
+        condition: service_completed_successfully

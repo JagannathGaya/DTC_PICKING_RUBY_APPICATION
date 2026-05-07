@@ -69,7 +69,8 @@ WORKDIR /app
 # Copy only Gemfile + lockfile first so `bundle install` is cached
 # across code changes that don't touch dependencies.
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --jobs 4 --retry 3
+RUN gem install rake -v 13.0.6 \
+ && bundle install --jobs 4 --retry 3
 
 # Now copy the rest of the application code.
 COPY . .
