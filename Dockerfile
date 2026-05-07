@@ -18,6 +18,8 @@ RUN sed -i 's|http://deb.debian.org|http://archive.debian.org|g; s|http://securi
 #   imagemagick: required by `paperclip` for image processing
 #   git: bundler fetches `ar-octopus` from a git source in the Gemfile
 #   tzdata: ActiveSupport timezone data
+#   libaio1: required by Oracle Instant Client at runtime
+#   unzip: extract the Instant Client zip files
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
@@ -30,15 +32,32 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     curl \
     dos2unix \
     shared-mime-info \
+    libaio1 \
+    unzip \
   && rm -rf /var/lib/apt/lists/*
+
+# Install Oracle Instant Client (Basic + SDK).
+#   Basic = libclntsh.so + friends (runtime). Required to talk to Oracle DBs.
+#   SDK   = C headers (oci.h, etc.). Required to compile the `ruby-oci8` gem
+#           during `bundle install`.
+# Pinned to 19.23 (works with Oracle DB 11g and newer).
+ENV ORACLE_HOME=/opt/oracle/instantclient_19_23 \
+    LD_LIBRARY_PATH=/opt/oracle/instantclient_19_23 \
+    PATH=/opt/oracle/instantclient_19_23:$PATH
+RUN mkdir -p /opt/oracle \
+ && cd /opt/oracle \
+ && curl -fsSLO https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
+ && curl -fsSLO https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
+ && unzip -q instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
+ && unzip -q instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
+ && rm -f instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
+          instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
+ && ln -sf /opt/oracle/instantclient_19_23/libclntsh.so.19.1 /opt/oracle/instantclient_19_23/libclntsh.so \
+ && echo /opt/oracle/instantclient_19_23 > /etc/ld.so.conf.d/oracle-instantclient.conf \
+ && ldconfig
 
 # Pin bundler to the version that produced Gemfile.lock (BUNDLED WITH 2.1.4).
 RUN gem install bundler -v '2.1.4'
-
-# Skip the `:oracle` Bundler group (ruby-oci8 + oracle_enhanced adapter).
-# Those gems require Oracle Instant Client, which isn't installed in this image.
-# Postgres-backed environments work fine without them.
-ENV BUNDLE_WITHOUT=oracle
 
 WORKDIR /app
 
@@ -66,7 +85,8 @@ RUN mkdir -p tmp/pids
 
 EXPOSE 3000
 
-# Remove a stale server.pid (left if a prior container crashed),
-# verify gems are present (auto-install if not — useful when the source bind
-# mount's Gemfile got new entries since the image was built), then start Rails.
-CMD ["bash", "-c", "rm -f tmp/pids/server.pid && (bundle check || bundle install) && bundle exec rails server -b 0.0.0.0 -p 3000"]
+# Remove a stale server.pid (left if a prior container crashed) and start Rails.
+# Gems are baked into the image at build time (see `RUN bundle install` above) —
+# the container does NOT re-install at startup. If you change Gemfile, rebuild
+# the image with `docker compose build` to install the new gems.
+CMD ["bash", "-c", "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3000"]
