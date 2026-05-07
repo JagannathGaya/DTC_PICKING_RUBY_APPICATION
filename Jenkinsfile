@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        APP_DIR = "/var/www/TBCORP"
+        APP_DIR = "${WORKSPACE}"
         RAILS_ENV = "development"   // change to production later
     }
 
@@ -15,10 +15,10 @@ pipeline {
 
                 echo "▶️ Starting Rails server..."
 
-                # Kill existing server if running
+                # Kill existing rails server
                 pkill -f "rails server" || true
 
-                # Start server in background
+                # Start Rails server in background
                 nohup bundle exec rails server -b 0.0.0.0 -p 3000 > app.log 2>&1 &
                 '''
             }
