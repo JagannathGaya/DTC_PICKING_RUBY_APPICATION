@@ -2,29 +2,46 @@ pipeline {
     agent any
 
     environment {
-        APP_DIR = "${WORKSPACE}"
+        APP_DIR =  "/var/www/TBCORP"
         RAILS_ENV = "development"   // change to production later
     }
 
-    stages {
-
-        stage('Start Server') {
+    stage('Deploy Code (rsync)') {
             steps {
                 sh '''
-                cd $APP_DIR
+                echo "🚀 Deploying using rsync..."
 
-                echo "▶️ Starting Rails server..."
+                mkdir -p $APP_DIR
 
-                # Kill existing rails server
-                pkill -f "rails server" || true
-
-                # Start Rails server in background
-                RAILS_ENV=development setsid bundle exec rails server -b 0.0.0.0 -p 3000 > app.log 2>&1 < /dev/null &
+                rsync -av --delete \
+                  --exclude='.git' \
+                  --exclude='log' \
+                  --exclude='tmp' \
+                  --exclude='node_modules' \
+                  $WORKSPACE/ $APP_DIR/
                 '''
             }
         }
 
-    }
+    // stages {
+
+    //     stage('Start Server') {
+    //         steps {
+    //             sh '''
+    //             cd $APP_DIR
+
+    //             echo "▶️ Starting Rails server..."
+
+    //             # Kill existing rails server
+    //             pkill -f "rails server" || true
+
+    //             # Start Rails server in background
+    //             RAILS_ENV=development setsid bundle exec rails server -b 0.0.0.0 -p 3000 > app.log 2>&1 < /dev/null &
+    //             '''
+    //         }
+    //     }
+
+    // }
 
     post {
         success {
