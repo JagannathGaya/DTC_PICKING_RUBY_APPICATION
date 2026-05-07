@@ -36,17 +36,17 @@ services:
   # -----------------------------------------------
   # Database setup (runs once)
   # -----------------------------------------------
-  db-setup:
-    <<: *app
-    container_name: tbcorp-db-setup
+  # db-setup:
+  #   <<: *app
+  #   container_name: tbcorp-db-setup
 
-    command: >
-      bash -c "
-        bundle exec rails db:prepare &&
-        bundle exec rails db:seed
-      "
+  #   command: >
+  #     bash -c "
+  #       bundle exec rails db:prepare &&
+  #       bundle exec rails db:seed
+  #     "
 
-    restart: "no"
+  #   restart: "no"
 
   # -----------------------------------------------
   # Rails web application
@@ -64,9 +64,9 @@ services:
     ports:
       - "3000:3000"
 
-    depends_on:
-      db-setup:
-        condition: service_completed_successfully
+    # depends_on:
+    #   db-setup:
+    #     condition: service_completed_successfully
 
   # -----------------------------------------------
   # Delayed Job worker (optional)
@@ -80,6 +80,6 @@ services:
         bundle exec rake jobs:work
       "
 
-    depends_on:
-      db-setup:
-        condition: service_completed_successfully
+    # depends_on:
+    #   db-setup:
+    #     condition: service_completed_successfully
