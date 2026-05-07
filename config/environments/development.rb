@@ -61,4 +61,11 @@ Rails.application.configure do
   config.label_format = {receiving: "RECVTEMPLATE1.btw"}
   config.label_printer = {receiving: "RECVPRINTER1"}
 
+
+  config.label_printer = {receiving: "RECVPRINTER1"}
+
+  config.action_mailer.default_url_options = { host: 'tbpick-dev.thbred.com' }
+
+ config.hosts << "tbpick-dev.thbred.com"
+
 end
