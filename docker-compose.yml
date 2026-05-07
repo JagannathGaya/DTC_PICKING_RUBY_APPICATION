@@ -37,10 +37,15 @@ services:
   # One-shot: create the DB if missing, then run any pending migrations.
   # `db:prepare` (Rails 6+) is idempotent — it creates+loads schema on first
   # run, and only runs pending migrations on subsequent runs. Exits when done.
-  # db-setup:
-  #   <<: *app
-  #   command: bash -c "bundle exec rails db:prepare"
-  #   restart: "no"
+  db-setup:
+    <<: *app
+    command: >
+      bash -c "
+        bundle exec rails db:create &&
+        bundle exec rails db:migrate &&
+        bundle exec rails db:seed
+      "
+    restart: "no"
 
   # Rails web app (Puma).
   web:
