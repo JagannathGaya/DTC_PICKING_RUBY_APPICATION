@@ -36,22 +36,27 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     unzip \
   && rm -rf /var/lib/apt/lists/*
 
-# Install Oracle Instant Client (Basic + SDK).
+# Install Oracle Instant Client (Basic + SDK) from local zip files.
 #   Basic = libclntsh.so + friends (runtime). Required to talk to Oracle DBs.
 #   SDK   = C headers (oci.h, etc.). Required to compile the `ruby-oci8` gem
 #           during `bundle install`.
+# The zip files must exist in `vendor/oracle/` in the build context. Download
+# them once from Oracle's site and place them there (or fetch them in your CI
+# before `docker build`):
+#   https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip
+#   https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip
 # Pinned to 19.23 (works with Oracle DB 11g and newer).
 ENV ORACLE_HOME=/opt/oracle/instantclient_19_23 \
     LD_LIBRARY_PATH=/opt/oracle/instantclient_19_23 \
     PATH=/opt/oracle/instantclient_19_23:$PATH
+COPY vendor/oracle/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip /tmp/
+COPY vendor/oracle/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip   /tmp/
 RUN mkdir -p /opt/oracle \
  && cd /opt/oracle \
- && curl -fsSLO https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
- && curl -fsSLO https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
- && unzip -q instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
- && unzip -q instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
- && rm -f instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
-          instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
+ && unzip -q /tmp/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
+ && unzip -q /tmp/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
+ && rm -f /tmp/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip \
+          /tmp/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip \
  && ln -sf /opt/oracle/instantclient_19_23/libclntsh.so.19.1 /opt/oracle/instantclient_19_23/libclntsh.so \
  && echo /opt/oracle/instantclient_19_23 > /etc/ld.so.conf.d/oracle-instantclient.conf \
  && ldconfig
