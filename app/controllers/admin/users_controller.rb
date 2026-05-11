@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::HomeController
   before_action :authorize_admin!
-  before_action :find_user, only: [:update, :edit, :destroy, :impersonate, :show, :unlock, :pick_release]
+  before_action :find_user, only: [:update, :edit, :destroy, :impersonate, :show, :unlock, :pick_release,:copy_permit]
   before_action :find_clients, only: [:update, :edit, :new, :create]
 
   def index

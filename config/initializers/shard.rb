@@ -17,6 +17,7 @@ begin
                                               :username => client.username,
                                               :password => client.password,
                                               :pool => 5}
+      puts "Oracle shard #{client.cust_no}: database=#{client.database.inspect}, username=#{client.username.inspect}, password_present=#{client.password.present?}"
       #   puts "Adding Client DB connector for: #{shards[:tb_shards][client.cust_no].inspect}" unless Rails.env.production?
       # else
       #   puts "Ignoring Client DB connector for: #{client.cust_no}" unless Rails.env.production?
